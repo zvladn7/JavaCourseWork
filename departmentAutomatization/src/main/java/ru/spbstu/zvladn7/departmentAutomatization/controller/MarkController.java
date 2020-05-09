@@ -1,6 +1,7 @@
 package ru.spbstu.zvladn7.departmentAutomatization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Mark;
+import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityOnDeleteByIdNotFoundException;
 import ru.spbstu.zvladn7.departmentAutomatization.repository.MarkRepository;
 
 import javax.validation.Valid;
@@ -50,7 +52,7 @@ public class MarkController {
         return new ResponseEntity<>(markRepo.findByTeacher(id), HttpStatus.OK);
     }
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/subject/{id}")
     public ResponseEntity<Iterable<Mark>> getSubjectMarks(@PathVariable long id) {
         return new ResponseEntity<>(markRepo.findBySubject(id), HttpStatus.OK);
     }
@@ -74,7 +76,10 @@ public class MarkController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
-        markRepo.deleteById(id);
-    }
+        try {
+            markRepo.deleteById(id);
+        } catch (EmptyResultDataAccessException ignored) {
+            throw new EntityOnDeleteByIdNotFoundException(id);
+        }    }
 
 }
