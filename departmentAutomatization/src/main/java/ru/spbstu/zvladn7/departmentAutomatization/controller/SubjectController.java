@@ -12,53 +12,52 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import ru.spbstu.zvladn7.departmentAutomatization.entity.Group;
-import ru.spbstu.zvladn7.departmentAutomatization.repository.GroupRepository;
+import ru.spbstu.zvladn7.departmentAutomatization.entity.Subject;
+import ru.spbstu.zvladn7.departmentAutomatization.repository.SubjectRepository;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/groups")
-public class GroupController {
+@RequestMapping("/api/subject")
+public class SubjectController {
 
-    private final GroupRepository groupRepo;
+    private final SubjectRepository subjectRepo;
 
     @Autowired
-    public GroupController(GroupRepository groupRepo) {
-        this.groupRepo = groupRepo;
+    public SubjectController(SubjectRepository subjectRepo) {
+        this.subjectRepo = subjectRepo;
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Group>> getGroups() {
-        return new ResponseEntity<>(groupRepo.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Subject>> getSubjects() {
+        return new ResponseEntity<>(subjectRepo.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Group> getGroupById(@PathVariable long id) {
-        return groupRepo.findById(id).map(group -> new ResponseEntity<>(group, HttpStatus.OK))
+    public ResponseEntity<Subject> getSubjectById(@PathVariable long id) {
+        return subjectRepo.findById(id).map(subject -> new ResponseEntity<>(subject, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public ResponseEntity<Group> create(@Valid @RequestBody Group group) {
-        return new ResponseEntity<>(groupRepo.save(group), HttpStatus.CREATED);
+    public ResponseEntity<Subject> create(@Valid @RequestBody Subject subject) {
+        return new ResponseEntity<>(subjectRepo.save(subject), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Group> update(
+    public ResponseEntity<Subject> update(
             @PathVariable long id,
-            @Valid @RequestBody Group group
+            @Valid @RequestBody Subject subject
     ) {
-        if (id != group.getId()) {
+        if (id != subject.getId()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(groupRepo.save(group), HttpStatus.OK);
+        return new ResponseEntity<>(subjectRepo.save(subject), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
-        groupRepo.deleteById(id);
+        subjectRepo.deleteById(id);
     }
-
 }
