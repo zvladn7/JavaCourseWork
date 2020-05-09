@@ -4,4 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
+
+    Iterable<Person> findByGroup(long id);
+
 }
