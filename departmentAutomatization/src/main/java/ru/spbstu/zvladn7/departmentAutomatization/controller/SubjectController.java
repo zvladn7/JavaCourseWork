@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Subject;
-import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityOnDeleteByIdNotFoundException;
+import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityByIdNotFoundException;
 import ru.spbstu.zvladn7.departmentAutomatization.repository.SubjectRepository;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/subject")
+@RequestMapping("/api/subjects")
 public class SubjectController {
 
     private final SubjectRepository subjectRepo;
@@ -63,6 +63,6 @@ public class SubjectController {
         try {
             subjectRepo.deleteById(id);
         } catch (EmptyResultDataAccessException ignored) {
-            throw new EntityOnDeleteByIdNotFoundException(id);
+            throw new EntityByIdNotFoundException(id);
         }    }
 }

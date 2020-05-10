@@ -11,20 +11,20 @@ import javax.validation.constraints.NotNull;
 public class Mark {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull(message = "Mark must have student id")
     @ManyToOne(targetEntity = Person.class)
-    private long student;
+    private Person student;
 
     @NotNull(message = "Mark must have subject id")
     @ManyToOne(targetEntity = Subject.class)
-    private long subject;
+    private Subject subject;
 
     @NotNull(message = "Mark must have teacher id")
     @ManyToOne(targetEntity = Person.class)
-    private long teacher;
+    private Person teacher;
 
     @Column
     @NotNull(message = "Mark value may not be empty")

@@ -1,6 +1,7 @@
 package ru.spbstu.zvladn7.departmentAutomatization.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(length = 20)
@@ -31,9 +32,8 @@ public class Person {
     @Size(max = 20, message = "Length of father name may not be more than 20")
     private String father_name;
 
-    @NotNull(message = "")
     @ManyToOne(targetEntity = Group.class)
-    private long group;
+    private Group group;
 
     @Column
     @NotNull(message = "Type of person may not be null")

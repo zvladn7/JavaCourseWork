@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Group;
-import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityOnDeleteByIdNotFoundException;
+import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityByIdNotFoundException;
 import ru.spbstu.zvladn7.departmentAutomatization.repository.GroupRepository;
 
 import javax.validation.Valid;
@@ -63,7 +63,7 @@ public class GroupController {
         try {
             groupRepo.deleteById(id);
         } catch (EmptyResultDataAccessException ignored) {
-            throw new EntityOnDeleteByIdNotFoundException(id);
+            throw new EntityByIdNotFoundException(id);
         }
     }
 

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import ru.spbstu.zvladn7.departmentAutomatization.entity.Group;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Person;
-import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityOnDeleteByIdNotFoundException;
+import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityByIdNotFoundException;
+import ru.spbstu.zvladn7.departmentAutomatization.repository.GroupRepository;
 import ru.spbstu.zvladn7.departmentAutomatization.repository.PersonRepository;
 
 import javax.validation.Valid;
@@ -25,9 +27,15 @@ public class PersonController {
 
     private final PersonRepository personRepo;
 
+    private final GroupRepository groupRepo;
+
     @Autowired
-    public PersonController(PersonRepository personRepo) {
+    public PersonController(
+            PersonRepository personRepo,
+            GroupRepository groupRepo
+    ) {
         this.personRepo = personRepo;
+        this.groupRepo = groupRepo;
     }
 
     @GetMapping
@@ -43,11 +51,20 @@ public class PersonController {
 
     @GetMapping("/group/{id}")
     public ResponseEntity<Iterable<Person>> getPersonsInGroup(@PathVariable long id) {
-        return new ResponseEntity<>(personRepo.findByGroup(id), HttpStatus.OK);
+        Group group = groupRepo.findById(id).orElseThrow(() -> new EntityByIdNotFoundException(id));
+
+        return new ResponseEntity<>(personRepo.findByGroup(group), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Person> create(@Valid @RequestBody Person person) {
+        System.out.println(person.getId());
+        System.out.println(person.getFather_name());
+        System.out.println(person.getLast_name());
+        System.out.println(person.getFather_name());
+        System.out.println(person.getGroup());
+        System.out.println(person.getType());
+
         return new ResponseEntity<>(personRepo.save(person), HttpStatus.CREATED);
     }
 
@@ -68,6 +85,6 @@ public class PersonController {
         try {
             personRepo.deleteById(id);
         } catch (EmptyResultDataAccessException ignored) {
-            throw new EntityOnDeleteByIdNotFoundException(id);
+            throw new EntityByIdNotFoundException(id);
         }    }
 }
