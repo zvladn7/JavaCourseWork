@@ -9,5 +9,6 @@ import ru.spbstu.zvladn7.departmentAutomatization.entity.Person;
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
     Iterable<Person> findByGroup(Group group);
+    Iterable<Person> findByType(char type);
 
 }

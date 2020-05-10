@@ -25,8 +25,10 @@ import javax.validation.Valid;
 @RequestMapping("/api/people")
 public class PersonController {
 
-    private final PersonRepository personRepo;
+    private static final char STUDENT_TYPE = 'S';
+    private static final char TEACHER_TYPE = 'P';
 
+    private final PersonRepository personRepo;
     private final GroupRepository groupRepo;
 
     @Autowired
@@ -49,6 +51,16 @@ public class PersonController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/students")
+    public ResponseEntity<Iterable<Person>> getStudents() {
+        return new ResponseEntity<>(personRepo.findByType(STUDENT_TYPE), HttpStatus.OK);
+    }
+
+    @GetMapping("/teachers")
+    public ResponseEntity<Iterable<Person>> getTeachers() {
+        return new ResponseEntity<>(personRepo.findByType(TEACHER_TYPE), HttpStatus.OK);
+    }
+
     @GetMapping("/group/{id}")
     public ResponseEntity<Iterable<Person>> getPersonsInGroup(@PathVariable long id) {
         Group group = groupRepo.findById(id).orElseThrow(() -> new EntityByIdNotFoundException(id));
@@ -58,13 +70,6 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Person> create(@Valid @RequestBody Person person) {
-        System.out.println(person.getId());
-        System.out.println(person.getFather_name());
-        System.out.println(person.getLast_name());
-        System.out.println(person.getFather_name());
-        System.out.println(person.getGroup());
-        System.out.println(person.getType());
-
         return new ResponseEntity<>(personRepo.save(person), HttpStatus.CREATED);
     }
 
