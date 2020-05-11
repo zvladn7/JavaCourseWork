@@ -1,10 +1,10 @@
 import React from 'react';
-import SubjectsList from "./components/subjects/SubjectsList";
+import Subjects from "./components/subjects/Subjects";
 
 function App() {
   return (
     <div className="App">
-      <SubjectsList />
+      <Subjects />
     </div>
   );
 }

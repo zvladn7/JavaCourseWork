@@ -40,7 +40,7 @@ class AddSubject extends Component {
                     className="subject-add-input"
                     type="text"
                     placeholder="Новый предмет"
-                    value={ this.state.todoText }
+                    value={ this.state.subjectName }
                     onChange={ this.onSubjectNameChange }
                 />
 
