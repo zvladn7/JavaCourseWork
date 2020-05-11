@@ -3,6 +3,7 @@ import AddSubject from "./AddSubject";
 import {subjectModel} from "../../model/SubjectModel";
 import {observer} from "mobx-react";
 import {loadSubject} from "../actions/subjects/loadSubjects";
+import {SubjectListItem} from "./SubjectListItem";
 
 @observer
 class SubjectsList extends Component {
@@ -16,7 +17,7 @@ class SubjectsList extends Component {
             <AddSubject/>
             {
                 subjectModel.subjects.map((subject, index) => {
-                    return <div key={index}>{subject.name}</div>
+                    return <SubjectListItem key={index} subject={subject}/>
                 })
             }
         </div>

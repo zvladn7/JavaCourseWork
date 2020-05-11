@@ -37,17 +37,18 @@ class AddSubject extends Component {
             >
 
                 <input
+                    className="subject-add-input"
                     type="text"
-                    placeholder="Add new todo"
+                    placeholder="Новый предмет"
                     value={ this.state.todoText }
                     onChange={ this.onSubjectNameChange }
                 />
 
                 <button
+                    className="subject-add-button"
                     type="submit"
-                    aria-label="Add new todo"
                 >
-                    Добавить предмет
+                    Добавить
                 </button>
 
             </form>
