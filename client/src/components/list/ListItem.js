@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import {removeSubject} from "../actions/subjects/removeSubject";
-import {editSubjectName} from "../actions/subjects/editSubjectName";
 import {observer} from "mobx-react";
 
 @observer
 class ListItem extends Component {
 
     state = {
-        name: this.props.subject.name,
+        name: this.props.item.name,
         isEditEnable: false,
         editSaveButtonText: 'edit',
     }
 
     onDelete = () => {
-        removeSubject(this.props.subject.id)
+        this.props.removeElement(this.props.item.id)
     };
 
     onSubjectNameChange = event => {
@@ -35,8 +33,8 @@ class ListItem extends Component {
                 isEditEnable: true,
                 editSaveButtonText: 'edit'
             });
-            editSubjectName({
-                id: this.props.subject.id,
+            this.props.editElement({
+                id: this.props.item.id,
                 name: this.state.name
             });
         }

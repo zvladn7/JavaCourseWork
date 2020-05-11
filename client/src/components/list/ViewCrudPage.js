@@ -21,6 +21,9 @@ class ViewCrudPage extends Component {
                 <ItemsList
                     loadItems={this.props.loadItems}
                     items={this.props.items}
+                    editElement={this.props.editElement}
+                    removeElement={this.props.removeElement}
+                    isItemsPresent={this.props.isItemsPresent}
                 />
             </div>
         </div>
