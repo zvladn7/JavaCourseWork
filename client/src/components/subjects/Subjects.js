@@ -9,9 +9,14 @@ class Subjects extends Component {
 
     render() {
 
-        return <div className="department__subjects-list-component">
-            <AddSubject/>
-            <SubjectsList/>
+        return <div>
+            <h1 className="department__subjects-list-component-header">
+                Предметы
+            </h1>
+            <div className="department__subjects-list-component">
+                <AddSubject/>
+                <SubjectsList/>
+            </div>
         </div>
     }
 

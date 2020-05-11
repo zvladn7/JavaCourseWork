@@ -1,7 +1,72 @@
+.department__subjects-list-component-header {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 100px;
+    font-weight: 100;
+    line-height: 1.2;
+    color: #CCCCCC;
+    text-align: center;
+    margin: 0px;
+}
+
 .department__subjects-list-component {
     position: relative;
     width: 80%;
     max-width: 560px;
     min-width: 480px;
     margin: 0 auto 20px;
+    border: 1px solid #E6E6E6;
+    background-color: #FFF;
+}
+
+.subject-add {
+    height: 66px;
+
+}
+
+.subject-add-input {
+    font-size: 24px;
+    height: 66px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    width: 80%;
+    box-sizing: border-box;
+    border: 1px solid #E6E6E6;
+    padding-left: 20px;
+}
+
+.subject-add-button {
+    position: absolute;
+    width: 20%;
+    height: 66px;
+    background: transparent;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.subject-list-item {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.subject-list-item__input {
+    width: 76%;
+    height: 35px;
+    border: 1px solid #E6E6E6;
+    padding-left: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.subject-list-item__edit-save-button,
+.subject-list-item__delete-button{
+    position: relative;
+    width: 10%;
+    background: transparent;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 16px;
 }
