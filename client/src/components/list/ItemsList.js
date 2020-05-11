@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {subjectModel} from "../../model/SubjectModel";
 import {observer} from "mobx-react";
 import {loadSubject} from "../actions/subjects/loadSubjects";
-import SubjectListItem from "./SubjectListItem";
+import ListItem from "./ListItem";
 import {toJS} from "mobx";
 
 @observer
-class SubjectsList extends Component {
+class ItemsList extends Component {
 
     render() {
         if (!subjectModel.isPresent) {
@@ -14,10 +14,10 @@ class SubjectsList extends Component {
         }
         console.log(toJS(subjectModel.subjects));
 
-        return <div className="department__subjects-list">
+        return <div className="department__list">
             {
-                subjectModel.subjects.map((subject) => {
-                    return <SubjectListItem key={subject.id} subject={subject}/>
+                this.props.items.map((subject) => {
+                    return <ListItem key={subject.id} subject={subject}/>
                 })
             }
         </div>
@@ -25,4 +25,4 @@ class SubjectsList extends Component {
 
 }
 
-export default SubjectsList;
+export default ItemsList;

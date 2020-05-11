@@ -1,34 +1,38 @@
 import React, { Component } from 'react';
-import {createSubject} from "../actions/subjects/createSubject";
 
-class AddSubject extends Component {
+class AddItem extends Component {
 
-    state = {
-        subjectName: '',
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: '',
+        }
+
     }
 
     onSubjectNameChange = event => {
         this.setState({
-            subjectName: event.target.value
+            name: event.target.value
         });
     }
 
     onSubmit = event => {
         event.preventDefault();
 
-        const currentSubjectName = this.state.subjectName;
+        const currentName = this.state.name;
 
         this.setState({
-            subjectName: '',
+            name: '',
         });
 
-        createSubject({
-            name: currentSubjectName,
+        this.props.createElement({
+            name: currentName,
         })
     }
 
     render() {
-        return <div className="subject-add">
+        return <div className="list-item-add">
             <form
                 method="post"
                 action="/"
@@ -37,18 +41,18 @@ class AddSubject extends Component {
             >
 
                 <input
-                    className="subject-add-input"
+                    className="list-item-add-input"
                     type="text"
-                    placeholder="Новый предмет"
-                    value={ this.state.subjectName }
+                    placeholder={this.props.addInputPlaceholder}
+                    value={ this.state.name }
                     onChange={ this.onSubjectNameChange }
                 />
 
                 <button
-                    className="subject-add-button"
+                    className="list-item-add-button"
                     type="submit"
                 >
-                    Добавить
+                    Add
                 </button>
 
             </form>
@@ -57,4 +61,4 @@ class AddSubject extends Component {
 
 }
 
-export default AddSubject;
+export default AddItem;

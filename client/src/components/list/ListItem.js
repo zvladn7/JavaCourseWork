@@ -4,7 +4,7 @@ import {editSubjectName} from "../actions/subjects/editSubjectName";
 import {observer} from "mobx-react";
 
 @observer
-class SubjectListItem extends Component {
+class ListItem extends Component {
 
     state = {
         name: this.props.subject.name,
@@ -44,20 +44,20 @@ class SubjectListItem extends Component {
 
     render() {
 
-        return <div className="subject-list-item">
+        return <div className="list-item">
             <input
-                className="subject-list-item__input"
+                className="list-item__input"
                 value={ this.state.name }
                 onChange={this.onSubjectNameChange}
             />
             <button
-                className="subject-list-item__edit-save-button"
+                className="list-item__edit-save-button"
                 onClick={this.enableEditOrSave}
             >
                 {this.state.editSaveButtonText}
             </button>
             <button
-                className="subject-list-item__delete-button"
+                className="list-item__delete-button"
                 onClick={ this.onDelete }
             >
                 ×
@@ -67,4 +67,4 @@ class SubjectListItem extends Component {
 
 }
 
-export default SubjectListItem;
+export default ListItem;
