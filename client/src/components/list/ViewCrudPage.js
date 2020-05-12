@@ -3,11 +3,15 @@ import AddItem from "./AddItem";
 import '../../css/subjects/list.css';
 import ItemsList from "./ItemsList";
 import {observer} from "mobx-react";
+import {menubarModel} from "../../model/MenubarModel";
 
 @observer
 class ViewCrudPage extends Component {
 
     render() {
+        if (menubarModel.isSelectedMenubarItemChanged) {
+            menubarModel.redirect(menubarModel.selectedMenubarItem);
+        }
 
         return <div>
             <h1 className="department__-list-component-header">
