@@ -1,4 +1,5 @@
 import {groupModel} from "../../../model/GroupModel";
+import {studentsModel} from "../../../model/StudentsModel";
 
 export async function loadGroups() {
 
@@ -13,4 +14,5 @@ export async function loadGroups() {
     groupModel.groups = await response.json();
 
     groupModel.isPresent = true;
+    studentsModel.isGroupsLoaded = true;
 }

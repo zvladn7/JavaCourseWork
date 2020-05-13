@@ -1,4 +1,4 @@
-import {observable} from 'mobx'
+import {action, observable} from 'mobx'
 
 export class StudentsModel {
 
@@ -7,6 +7,17 @@ export class StudentsModel {
 
     @observable
     isPresent = false;
+
+    @observable
+    isGroupsLoaded = false;
+
+    @observable
+    selectedGroups = [];
+
+    @action
+    dropGroupLoadedFlag() {
+        this.isGroupsLoaded = false;
+    }
 
 }
 
