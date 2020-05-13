@@ -51,6 +51,7 @@
     "react-mobx": "0.0.4",
     "react-router-dom": "^5.1.2",
     "react-router": "^5.2.0",
+    "react-select": "^3.1.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.2",

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ViewCrudPage from "./components/list/ViewCrudPage";
 import {subjectModel} from "./model/SubjectModel";
 import {loadSubject} from "./components/actions/subjects/loadSubjects";
@@ -14,6 +13,7 @@ import {editGroupName} from "./components/actions/groups/editGroupName";
 import {removeGroup} from "./components/actions/groups/removeGroup";
 import MenuBar from "./components/MenuBar";
 import {menubarModel} from "./model/MenubarModel";
+import Students from "./components/students/Students";
 
 @observer
 class App extends Component {
@@ -42,6 +42,8 @@ class App extends Component {
                     addInputPlaceholder={'Add new group'}
                     isItemsPresent={groupModel.isPresent}
                 />;
+            case 'students':
+                return <Students/>
             default:
                 break;
         }

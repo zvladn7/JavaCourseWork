@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddItem from "./AddItem";
-import '../../css/subjects/list.css';
+import '../../css/list.css';
 import ItemsList from "./ItemsList";
 import {observer} from "mobx-react";
 import {menubarModel} from "../../model/MenubarModel";
