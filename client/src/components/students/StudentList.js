@@ -5,6 +5,7 @@ import {observer} from "mobx-react";
 import CustomSelect from "../CustomSelect";
 import {groupModel} from "../../model/GroupModel";
 import {loadGroups} from "../actions/groups/loadGroups";
+import {toJS} from "mobx";
 
 @observer
 class StudentList extends Component {
@@ -36,6 +37,8 @@ class StudentList extends Component {
 
     render() {
 
+        console.log('from list', toJS(this.props.students));
+
         if (studentsModel.isGroupsLoaded) {
             this.onOptionChange();
         }
@@ -45,6 +48,7 @@ class StudentList extends Component {
                 options={this.state.options}
                 isMulti={true}
                 placeholder={'All groups selected'}
+                isStudentSelect={true}
             />
             {
                 this.props.students.map((student,index) => {

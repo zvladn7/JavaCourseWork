@@ -19,11 +19,15 @@ class Students extends Component {
             loadStudents();
         }
 
+        if (studentsModel.isFilterRequired) {
+            studentsModel.filterStudents();
+        }
+
         return <div>
             <h1 className="department__-list-component-header">
                 Students
             </h1>
-            <StudentList students={studentsModel.students}/>
+            <StudentList students={studentsModel.filteredStudents}/>
         </div>
     }
 

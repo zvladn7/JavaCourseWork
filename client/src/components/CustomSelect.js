@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import {observer} from "mobx-react";
+import {studentsModel} from "../model/StudentsModel";
 
 @observer
 class CustomSelect extends React.Component {
@@ -44,6 +45,14 @@ class CustomSelect extends React.Component {
 
     handleChange = selectedOption => {
         this.setState({ selectedOption });
+        if (this.props.isStudentSelect) {
+            studentsModel.isFilterRequired = true;
+            if (selectedOption !== null) {
+                studentsModel.selectedGroups = selectedOption.map(item => item.value);
+            } else {
+                studentsModel.selectedGroups = [];
+            }
+        }
     };
 
     render() {
