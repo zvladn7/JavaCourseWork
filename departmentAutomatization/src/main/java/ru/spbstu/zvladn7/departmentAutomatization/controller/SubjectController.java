@@ -64,5 +64,6 @@ public class SubjectController {
             subjectRepo.deleteById(id);
         } catch (EmptyResultDataAccessException ignored) {
             throw new EntityByIdNotFoundException(id);
-        }    }
+        }
+    }
 }
