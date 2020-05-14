@@ -6,6 +6,8 @@ import CustomSelect from "../CustomSelect";
 import {groupModel} from "../../model/GroupModel";
 import {loadGroups} from "../actions/groups/loadGroups";
 import {toJS} from "mobx";
+import {marksModel} from "../../model/MarksModel";
+import {menubarModel} from "../../model/MenubarModel";
 
 @observer
 class StudentList extends Component {
@@ -35,12 +37,21 @@ class StudentList extends Component {
         studentsModel.dropGroupLoadedFlag();
     }
 
-    render() {
+    onLinkClicked = (person) => {
+        marksModel.currentPerson = person;
+        menubarModel.isSelectedMenubarItemChanged = true;
+        menubarModel.selectedMenubarItem = '3';
+    }
 
-        console.log('from list', toJS(this.props.students));
+    render() {
 
         if (studentsModel.isGroupsLoaded) {
             this.onOptionChange();
+        }
+
+        if (menubarModel.isSelectedMenubarItemChanged) {
+            console.log('redirect123', menubarModel.selectedMenubarItem)
+            menubarModel.redirect(menubarModel.selectedMenubarItem);
         }
 
         return <div className="department__students-list">
@@ -52,12 +63,14 @@ class StudentList extends Component {
             />
             {
                 this.props.students.map((student,index) => {
-                    return <StudentListItem
-                        key={student.id}
-                        number={index}
-                        studentFullName={student.last_name + ' ' + student.first_name + ' ' + student.father_name}
-                        group={student.group.name}
-                    />
+                    return <div onClick={() => this.onLinkClicked(student)}>
+                        <StudentListItem
+                            key={student.id}
+                            number={index}
+                            studentFullName={student.last_name + ' ' + student.first_name + ' ' + student.father_name}
+                            group={student.group.name}
+                        />
+                    </div>
                 })
             }
         </div>

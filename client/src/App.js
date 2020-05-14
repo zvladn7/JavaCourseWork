@@ -14,6 +14,7 @@ import {removeGroup} from "./components/actions/groups/removeGroup";
 import MenuBar from "./components/MenuBar";
 import {menubarModel} from "./model/MenubarModel";
 import Students from "./components/students/Students";
+import Marks from "./components/marks/Marks";
 
 @observer
 class App extends Component {
@@ -42,6 +43,8 @@ class App extends Component {
                     addInputPlaceholder={'Add new group'}
                     isItemsPresent={groupModel.isPresent}
                 />;
+            case 'marks':
+                return <Marks/>
             case 'students':
                 return <Students/>
             default:

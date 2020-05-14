@@ -15,5 +15,5 @@ export async function loadStudents() {
     studentsModel.filterStudents();
 
     studentsModel.isPresent = true;
-    console.log(toJS(studentsModel.students));
+    // console.log(toJS(studentsModel.students));
 }
