@@ -3,11 +3,10 @@ import {menubarModel} from "../../model/MenubarModel";
 import {observer} from "mobx-react";
 import {marksModel} from "../../model/MarksModel";
 import "../../css/marks.css";
+import MarksList from "./MarksList";
 
 @observer
 class Marks extends Component {
-
-
 
     render() {
         if (menubarModel.isSelectedMenubarItemChanged) {
@@ -21,6 +20,7 @@ class Marks extends Component {
             <h2 className="marks-page-person-name">
                 {marksModel.currentPerson.last_name + ' ' + marksModel.currentPerson.first_name + ' ' + marksModel.currentPerson.father_name}
             </h2>
+            <MarksList/>
         </div>
     }
 

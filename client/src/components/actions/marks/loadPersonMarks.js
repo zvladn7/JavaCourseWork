@@ -1,7 +1,7 @@
 import {toJS} from "mobx";
 import {marksModel} from "../../../model/MarksModel";
 
-export async function loadStudents(personId) {
+export async function loadPersonMarks(personId) {
 
     const response = await fetch('/api/marks/student/' + personId, {
         method: "GET",

@@ -63,9 +63,11 @@ class StudentList extends Component {
             />
             {
                 this.props.students.map((student,index) => {
-                    return <div onClick={() => this.onLinkClicked(student)}>
+                    return <div
+                        key={index}
+                        onClick={() => this.onLinkClicked(student)}
+                    >
                         <StudentListItem
-                            key={student.id}
                             number={index}
                             studentFullName={student.last_name + ' ' + student.first_name + ' ' + student.father_name}
                             group={student.group.name}
