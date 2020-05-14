@@ -11,7 +11,7 @@ public class JwtProperties {
     @Value("${jwt.secretKey}")
     private String secretKey;
 
-    @Value("${jwt.validationInMs}")
+    @Value("${jwt.validity}")
     private long validationInMs;
 
     public String getSecretKey() {
