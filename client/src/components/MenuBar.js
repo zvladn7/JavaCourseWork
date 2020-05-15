@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/menubar.css'
 import {menubarModel} from "../model/MenubarModel";
 import {observer} from "mobx-react";
+import {userModel} from "../model/UserModel";
 
 @observer
 class MenuBar extends Component {
@@ -10,6 +11,12 @@ class MenuBar extends Component {
     onMenuBarItemClicked = event => {
         menubarModel.selectedMenubarItem = event.target.id;
         menubarModel.isSelectedMenubarItemChanged = true;
+    }
+
+    onSignOut = () => {
+        localStorage.clear();
+        userModel.token = null;
+        userModel.person = null;
     }
 
     render() {
@@ -52,6 +59,14 @@ class MenuBar extends Component {
                 >
                     Студенты
                 </button>
+                <div className="menubar-signout-button-container">
+                    <button
+                        className="menubar-signout-button"
+                        onClick={this.onSignOut}
+                    >
+                        Выйти
+                    </button>
+                </div>
             </div>
         );
     }

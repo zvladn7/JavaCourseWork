@@ -17,7 +17,6 @@ import Students from "./components/students/Students";
 import Marks from "./components/marks/Marks";
 import {userModel} from "./model/UserModel";
 import {Redirect} from "react-router-dom";
-import {marksModel} from "./model/MarksModel";
 
 @observer
 class App extends Component {
@@ -55,18 +54,9 @@ class App extends Component {
         }
     }
 
-    checkLocalStorage = () => {
-        userModel.token = JSON.parse(localStorage.getItem("token"));
-        userModel.person = JSON.parse(localStorage.getItem("person"));
-        marksModel.currentPerson = userModel.person;
-    }
-
     render() {
         if (userModel.token === null) {
-            this.checkLocalStorage();
-            if (userModel.token === null) {
-                return <Redirect to='/'/>;
-            }
+            return <Redirect to='/'/>;
         }
 
         return (

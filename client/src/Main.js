@@ -3,8 +3,19 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from "./components/Login";
 import Registration from "./components/Registration";
 import App from "./App";
+import {userModel} from "./model/UserModel";
+import {marksModel} from "./model/MarksModel";
 
 class Main extends Component {
+
+    constructor(props) {
+        super(props);
+
+        userModel.token = JSON.parse(localStorage.getItem("token"));
+        userModel.person = JSON.parse(localStorage.getItem("person"));
+        marksModel.currentPerson = userModel.person;
+    }
+
 
     render() {
         return <div className="Main">
