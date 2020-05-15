@@ -19,7 +19,9 @@ public class TestDataInit implements CommandLineRunner {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
+        userRepo.deleteAll();
+
         userRepo.save(new User(
                 "zvladn7",
                 passwordEncoder.encode("123"),

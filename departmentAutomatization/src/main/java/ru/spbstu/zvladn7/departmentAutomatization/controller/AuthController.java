@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,15 +33,18 @@ public class AuthController {
     @Autowired
     UserRepository userRepo;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping("/signin")
-    public ResponseEntity singIn(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<Map<Object, Object>> singIn(@RequestBody AuthRequest authRequest) {
         try {
-            String username = authRequest.getUserName();
+            String username = authRequest.getUsername();
             User user = userRepo.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 
-            if (!user.getPassword().equals(authRequest.getPassword())) {
-                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            if (passwordEncoder.matches(passwordEncoder.encode(authRequest.getPassword()), user.getPassword())) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
 
             String token = jwtTokenProvider.createToken(
@@ -48,11 +52,11 @@ public class AuthController {
                     user.getRoles()
             );
 
-            Map<Object, Object>  model = new HashMap<>();
-            model.put("userName", username);
-            model.put("token", token);
+            Map<Object, Object>  map = new HashMap<>();
+            map.put("userName", username);
+            map.put("token", token);
 
-            return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity<>(map, HttpStatus.OK);
         } catch (AuthenticationException ex) {
             throw new BadCredentialsException("Invalid username or password");
         }
