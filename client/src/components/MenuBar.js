@@ -23,7 +23,7 @@ class MenuBar extends Component {
                                 : "menubar-item"}
                     onClick={this.onMenuBarItemClicked}
                 >
-                    Subjects
+                    Предметы
                 </button>
                 <button
                     id="2"
@@ -32,7 +32,7 @@ class MenuBar extends Component {
                         : "menubar-item"}
                     onClick={this.onMenuBarItemClicked}
                 >
-                    Groups
+                    Группы
                 </button>
                 <button
                     id="3"
@@ -41,7 +41,7 @@ class MenuBar extends Component {
                         : "menubar-item"}
                     onClick={this.onMenuBarItemClicked}
                 >
-                    Marks
+                    Оценки
                 </button>
                 <button
                     id="4"
@@ -50,7 +50,7 @@ class MenuBar extends Component {
                         : "menubar-item"}
                     onClick={this.onMenuBarItemClicked}
                 >
-                    Students
+                    Студенты
                 </button>
             </div>
         );

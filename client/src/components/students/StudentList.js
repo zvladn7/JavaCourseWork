@@ -57,7 +57,7 @@ class StudentList extends Component {
             <CustomSelect
                 options={this.state.options}
                 isMulti={true}
-                placeholder={'All groups selected'}
+                placeholder={'Студенты всех групп'}
                 isStudentSelect={true}
             />
             {

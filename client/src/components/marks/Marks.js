@@ -15,7 +15,7 @@ class Marks extends Component {
 
         return <div className="marks-page">
             <h1 className="department__-list-component-header">
-                Marks
+                Оценки
             </h1>
             <h2 className="marks-page-person-name">
                 {marksModel.currentPerson.last_name + ' ' + marksModel.currentPerson.first_name + ' ' + marksModel.currentPerson.father_name}

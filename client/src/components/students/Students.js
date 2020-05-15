@@ -25,7 +25,7 @@ class Students extends Component {
 
         return <div>
             <h1 className="department__-list-component-header">
-                Students
+                Студенты
             </h1>
             <StudentList students={studentsModel.filteredStudents}/>
         </div>

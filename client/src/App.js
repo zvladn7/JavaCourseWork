@@ -17,6 +17,7 @@ import Students from "./components/students/Students";
 import Marks from "./components/marks/Marks";
 import {userModel} from "./model/UserModel";
 import {Redirect} from "react-router-dom";
+import {marksModel} from "./model/MarksModel";
 
 @observer
 class App extends Component {
@@ -26,23 +27,23 @@ class App extends Component {
             case 'subjects':
                 return <ViewCrudPage
                     items={subjectModel.subjects}
-                    header={'Subjects'}
+                    header={'Предметы'}
                     loadItems={loadSubject}
                     createElement={(item) => createSubject(item)}
                     editElement={(item) => editSubjectName(item)}
                     removeElement={(itemId) => removeSubject(itemId)}
-                    addInputPlaceholder={'Add new subject'}
+                    addInputPlaceholder={'Добавить предмет'}
                     isItemsPresent={subjectModel.isPresent}
                 />;
             case 'groups':
                 return <ViewCrudPage
                     items={groupModel.groups}
-                    header={'Groups'}
+                    header={'Группы'}
                     loadItems={loadGroups}
                     createElement={(item) => createGroup(item)}
                     editElement={(item) => editGroupName(item)}
                     removeElement={(itemId) => removeGroup(itemId)}
-                    addInputPlaceholder={'Add new group'}
+                    addInputPlaceholder={'Создать группу'}
                     isItemsPresent={groupModel.isPresent}
                 />;
             case 'marks':
@@ -54,10 +55,18 @@ class App extends Component {
         }
     }
 
+    checkLocalStorage = () => {
+        userModel.token = JSON.parse(localStorage.getItem("token"));
+        userModel.person = JSON.parse(localStorage.getItem("person"));
+        marksModel.currentPerson = userModel.person;
+    }
 
     render() {
         if (userModel.token === null) {
-            return <Redirect to='/'/>;
+            this.checkLocalStorage();
+            if (userModel.token === null) {
+                return <Redirect to='/'/>;
+            }
         }
 
         return (

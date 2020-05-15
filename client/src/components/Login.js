@@ -46,6 +46,7 @@ class Login extends Component {
     }
 
     render() {
+
         if (userModel.token !== null) {
             return <Redirect to='/app'/>;
         }
