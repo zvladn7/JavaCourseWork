@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -29,13 +30,22 @@ public class User implements UserDetails {
     @NotBlank(message = "Password may not be blank")
     private String password;
 
+    @NotNull(message = "Mark must have student id")
+    @ManyToOne(targetEntity = Person.class)
+    private Person person;
+
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>(); //init if we use no args constructor
 
-    public User(String username, String password, List<String> roles) {
+    public User(String username, String password, Person person, List<String> roles) {
         this.username = username;
         this.password = password;
+        this.person = person;
         this.roles = roles;
+    }
+
+    public Person getPerson() {
+        return person;
     }
 
     public List<String> getRoles() {

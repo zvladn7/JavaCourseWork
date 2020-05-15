@@ -35,7 +35,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/api/auth/signup").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/groups").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/marks/student/{id}").hasRole("STUDENT")
+                .antMatchers(HttpMethod.POST, "/api/groups").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtSecurityConfigurer(jwtTokenProvider));

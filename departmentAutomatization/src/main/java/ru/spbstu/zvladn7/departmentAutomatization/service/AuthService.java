@@ -20,8 +20,8 @@ import java.util.Optional;
 @Service
 public class AuthService {
 
-    private static final String STUDENT = "ROLE_STUDENT";
-    private static final String TEACHER = "ROLE_TEACHER";
+    private static final String STUDENT = "STUDENT";
+    private static final String TEACHER = "TEACHER";
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -53,8 +53,9 @@ public class AuthService {
         );
 
         Map<Object, Object>  map = new HashMap<>();
-        map.put("userName", username);
+        map.put("username", username);
         map.put("token", token);
+        map.put("person", user.getPerson());
 
         return map;
     }
@@ -66,14 +67,6 @@ public class AuthService {
             return false;
         }
 
-        User newUser = new User(
-                username,
-                passwordEncoder.encode(authRequest.getPassword()),
-                Collections.singletonList(authRequest.isStudent() ? STUDENT : TEACHER)
-        );
-
-        userRepo.save(newUser);
-
         Person person = new Person(
                 authRequest.getFirst_name(),
                 authRequest.getLast_name(),
@@ -82,7 +75,16 @@ public class AuthService {
                 'S'
         );
 
-        personRepo.save(person);
+        person = personRepo.save(person);
+
+        User newUser = new User(
+                username,
+                passwordEncoder.encode(authRequest.getPassword()),
+                person,
+                Collections.singletonList(authRequest.isStudent() ? STUDENT : TEACHER)
+        );
+
+        userRepo.save(newUser);
 
         return true;
     }

@@ -64,6 +64,7 @@ public class MarkController {
         if (student.getType() != STUDENT_TYPE) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
         return new ResponseEntity<>(markRepo.findByStudent(student), HttpStatus.OK);
     }
 
