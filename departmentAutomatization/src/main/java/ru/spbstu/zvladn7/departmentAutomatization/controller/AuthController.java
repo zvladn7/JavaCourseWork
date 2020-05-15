@@ -43,7 +43,7 @@ public class AuthController {
             User user = userRepo.findByUsername(username)
                     .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 
-            if (passwordEncoder.matches(passwordEncoder.encode(authRequest.getPassword()), user.getPassword())) {
+            if (!passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
 
