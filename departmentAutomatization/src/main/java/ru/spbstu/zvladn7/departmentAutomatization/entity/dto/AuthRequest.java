@@ -10,7 +10,7 @@ public class AuthRequest implements Serializable {
 
     private String username;
     private String password;
-    private String role;
+    private boolean isStudent;
     private String first_name;
     private String last_name;
     private String father_name;

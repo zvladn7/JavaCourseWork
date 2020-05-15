@@ -1,7 +1,9 @@
 package ru.spbstu.zvladn7.departmentAutomatization.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -39,4 +41,11 @@ public class Person {
     @NotNull(message = "Type of person may not be null")
     private char type;
 
+    public Person(String first_name, String last_name, String father_name, Group group, char type) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.father_name = father_name;
+        this.group = group;
+        this.type = type;
+    }
 }

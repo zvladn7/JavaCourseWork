@@ -20,17 +20,17 @@ public class TestDataInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        userRepo.deleteAll();
-
-        userRepo.save(new User(
-                "zvladn7",
-                passwordEncoder.encode("123"),
-                Collections.singletonList("ROLE_STUDENT")
-        ));
-        userRepo.save(new User(
-                "zvladn",
-                passwordEncoder.encode("a123"),
-                Collections.singletonList("ROLE_TEACHER")
-        ));
+//        userRepo.deleteAll();
+//
+//        userRepo.save(new User(
+//                "zvladn7",
+//                passwordEncoder.encode("123"),
+//                Collections.singletonList("ROLE_STUDENT")
+//        ));
+//        userRepo.save(new User(
+//                "zvladn",
+//                passwordEncoder.encode("a123"),
+//                Collections.singletonList("ROLE_TEACHER")
+//        ));
     }
 }
