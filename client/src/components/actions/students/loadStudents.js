@@ -1,4 +1,5 @@
 import {studentsModel} from "../../../model/StudentsModel";
+import {userModel} from "../../../model/UserModel";
 import {toJS} from "mobx";
 
 export async function loadStudents() {
@@ -7,12 +8,13 @@ export async function loadStudents() {
         method: "GET",
         dataType: "JSON",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
-
     studentsModel.students = await response.json();
     studentsModel.filterStudents();
+
 
     studentsModel.isPresent = true;
 }

@@ -1,4 +1,5 @@
 import {subjectModel} from "../../../model/SubjectModel";
+import {userModel} from "../../../model/UserModel";
 
 export async function editSubjectName(subject) {
 
@@ -7,7 +8,8 @@ export async function editSubjectName(subject) {
         dataType: "JSON",
         body: JSON.stringify(subject),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
 

@@ -1,26 +1,55 @@
 import React, { Component } from 'react';
 import '../css/login.css';
+import {signIn} from "./actions/signIn";
+import {userModel} from "../model/UserModel";
+import { Redirect } from 'react-router-dom';
+import {observer} from "mobx-react";
 
+@observer
 class Login extends Component {
 
     state = {
-        login: '',
+        username: '',
         password: '',
     }
 
     onLoginChange = event => {
         this.setState({
-            login: event.target.value
+            username: event.target.value
         });
+        console.log(event.target.value);
     }
 
     onPasswordChange = event => {
         this.setState({
             password: event.target.value
         });
+        console.log(event.target.value);
+    }
+
+    onSignInClick = event => {
+        event.preventDefault();
+
+        const currentUsername = this.state.username;
+        const currentPassword = this.state.password;
+
+
+        signIn({
+            username: currentUsername,
+            password: currentPassword
+        });
+
+        this.setState({
+            username: '',
+            password: '',
+        });
     }
 
     render() {
+        if (userModel.token !== null) {
+            return <Redirect to='/app'/>;
+        }
+
         return  <div className="login-page">
 
             <div className="menubar">
@@ -55,6 +84,7 @@ class Login extends Component {
                             type="submit"
                             value="войти"
                             name="signIn"
+                            onClick={this.onSignInClick}
                         />
                     </div>
                 </div>

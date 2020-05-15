@@ -15,6 +15,8 @@ import MenuBar from "./components/MenuBar";
 import {menubarModel} from "./model/MenubarModel";
 import Students from "./components/students/Students";
 import Marks from "./components/marks/Marks";
+import {userModel} from "./model/UserModel";
+import {Redirect} from "react-router-dom";
 
 @observer
 class App extends Component {
@@ -54,6 +56,10 @@ class App extends Component {
 
 
     render() {
+        if (userModel.token === null) {
+            return <Redirect to='/'/>;
+        }
+
         return (
             <div className="App">
                 <MenuBar/>

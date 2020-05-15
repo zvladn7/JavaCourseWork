@@ -5,7 +5,6 @@ import {observer} from "mobx-react";
 import CustomSelect from "../CustomSelect";
 import {groupModel} from "../../model/GroupModel";
 import {loadGroups} from "../actions/groups/loadGroups";
-import {toJS} from "mobx";
 import {marksModel} from "../../model/MarksModel";
 import {menubarModel} from "../../model/MenubarModel";
 
@@ -63,6 +62,9 @@ class StudentList extends Component {
             />
             {
                 this.props.students.map((student,index) => {
+                    if (student.group === null) {
+                        return null;
+                    }
                     return <div
                         key={index}
                         onClick={() => this.onLinkClicked(student)}

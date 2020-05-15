@@ -1,5 +1,6 @@
 import {toJS} from "mobx";
 import {marksModel} from "../../../model/MarksModel";
+import {userModel} from "../../../model/UserModel";
 
 export async function loadPersonMarks(personId) {
 
@@ -7,7 +8,8 @@ export async function loadPersonMarks(personId) {
         method: "GET",
         dataType: "JSON",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
 

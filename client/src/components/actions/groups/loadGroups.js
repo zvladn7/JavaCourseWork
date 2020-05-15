@@ -1,21 +1,21 @@
 import {groupModel} from "../../../model/GroupModel";
 import {studentsModel} from "../../../model/StudentsModel";
-import {toJS} from "mobx";
+import {userModel} from "../../../model/UserModel";
 
 export async function loadGroups() {
-
+    console.log('---------------------');
     const response = await fetch('/api/groups', {
         method: "GET",
         dataType: "JSON",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
 
+    groupModel.groups = [];
     groupModel.groups = await response.json();
 
     groupModel.isPresent = true;
     studentsModel.isGroupsLoaded = true;
-    console.log(response.status);
-    console.log(toJS(groupModel.groups));
 }

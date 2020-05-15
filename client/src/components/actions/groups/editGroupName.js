@@ -1,4 +1,5 @@
 import {groupModel} from "../../../model/GroupModel";
+import {userModel} from "../../../model/UserModel";
 
 export async function editGroupName(group) {
 
@@ -7,7 +8,8 @@ export async function editGroupName(group) {
         dataType: "JSON",
         body: JSON.stringify(group),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
 

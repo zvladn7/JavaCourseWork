@@ -3,7 +3,7 @@ import {observable} from "mobx";
 export class UserModel {
 
     @observable
-    token = '';
+    token = null;
 
 }
 

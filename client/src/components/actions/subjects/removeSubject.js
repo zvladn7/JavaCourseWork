@@ -1,4 +1,5 @@
 import {subjectModel} from "../../../model/SubjectModel";
+import {userModel} from "../../../model/UserModel";
 
 export async function removeSubject(subjectId) {
 
@@ -6,7 +7,8 @@ export async function removeSubject(subjectId) {
         method: "DELETE",
         dataType: "JSON",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
 

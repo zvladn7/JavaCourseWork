@@ -1,4 +1,5 @@
 import {groupModel} from "../../../model/GroupModel";
+import {userModel} from "../../../model/UserModel";
 
 export async function removeGroup(groupId) {
 
@@ -6,7 +7,8 @@ export async function removeGroup(groupId) {
         method: "DELETE",
         dataType: "JSON",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Token " + userModel.token
         }
     });
 
