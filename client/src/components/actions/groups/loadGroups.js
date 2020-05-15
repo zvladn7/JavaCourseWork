@@ -1,5 +1,6 @@
 import {groupModel} from "../../../model/GroupModel";
 import {studentsModel} from "../../../model/StudentsModel";
+import {toJS} from "mobx";
 
 export async function loadGroups() {
 
@@ -15,4 +16,6 @@ export async function loadGroups() {
 
     groupModel.isPresent = true;
     studentsModel.isGroupsLoaded = true;
+    console.log(response.status);
+    console.log(toJS(groupModel.groups));
 }

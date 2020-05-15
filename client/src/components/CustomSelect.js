@@ -8,9 +8,11 @@ class CustomSelect extends React.Component {
 
     customStyles = {
         container: () => ({
-            minWidth    : '100%',
+            minWidth    : this.props.isGroupSelect ? "0" : '100%',
+            width       : this.props.isGroupSelect ? "315px" : "-1",
             position    : "relative",
-            margin      : '0 auto'
+            margin      : this.props.isGroupSelect ? '2% 2% 2% 12%' : "0 auto",
+            color : "gray"
         }),
         placeholder: () => ({
             fontSize    : '18px',
@@ -45,7 +47,7 @@ class CustomSelect extends React.Component {
 
     handleChange = selectedOption => {
         this.setState({ selectedOption });
-        if (this.props.isStudentSelect) {
+        if (this.props.isStudentSelect || this.props.isGroupSelect) {
             studentsModel.isFilterRequired = true;
             if (selectedOption !== null) {
                 studentsModel.selectedGroups = selectedOption.map(item => item.value);
