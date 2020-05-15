@@ -29,7 +29,7 @@
     margin-left: 2%;
 }
 
-.signUpTop {
+.login-page__registration-button {
     display: flex;
     border: none;
     justify-content: center;
@@ -73,7 +73,7 @@
     flex-direction: column;
 }
 
-.header {
+.login-page__header {
     margin-top: 10%;
     margin-bottom: 15%;
     text-align: center;
@@ -85,8 +85,8 @@
     color: #CCCCCC;
 }
 
-.login,
-.pass {
+.login-page__login,
+.login-page__pass {
     padding-left: 2%;
     margin: 2% 2% 2% 12%;
     width: 300px;
@@ -103,8 +103,8 @@
     text-transform: lowercase;
 }
 
-.login:focus,
-.pass:focus {
+.login-page__login:focus,
+.login-page__pass:focus {
     outline: none;
     border-color: #2f2f2f;
     transition: .3s;

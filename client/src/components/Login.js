@@ -3,6 +3,23 @@ import '../css/login.css';
 
 class Login extends Component {
 
+    state = {
+        login: '',
+        password: '',
+    }
+
+    onLoginChange = event => {
+        this.setState({
+            login: event.target.value
+        });
+    }
+
+    onPasswordChange = event => {
+        this.setState({
+            password: event.target.value
+        });
+    }
+
     render() {
         return  <div className="login-page">
 
@@ -15,21 +32,23 @@ class Login extends Component {
             <div className="login-page__window" >
                 <div className="login-page-frame">
                     <div className="login-page__window-content">
-                        <div className="header">
+                        <div className="login-page__header">
                             Login
                         </div>
                         <input
-                            className="login"
+                            className="login-page__login"
                             type="email"
                             autoFocus
                             placeholder="логин"
                             name="login"
+                            onChange={this.onLoginChange}
                         />
                         <input
-                            className="pass"
+                            className="login-page__pass"
                             type="password"
                             placeholder="пароль"
                             name="password"
+                            onChange={this.onPasswordChange}
                         />
                         <input
                             className="signIn"

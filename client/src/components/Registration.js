@@ -44,7 +44,7 @@ class Registration extends Component {
         return <div className="registration-page">
 
             <div className="menubar">
-                <button className="registration-page__registration-button">
+                <button className="registration-page__singup-button">
                     Вход
                 </button>
             </div>
@@ -52,7 +52,7 @@ class Registration extends Component {
             <div className="registration-page__window" >
                 <div className="registration-page-frame">
                     <div className="registration-page__window-content">
-                        <div className="header">
+                        <div className="registration-page-header">
                             Registration
                         </div>
                         <input
