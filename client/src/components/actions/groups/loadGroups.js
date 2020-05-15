@@ -9,7 +9,6 @@ export async function loadGroups() {
         dataType: "JSON",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Token " + userModel.token
         }
     });
 

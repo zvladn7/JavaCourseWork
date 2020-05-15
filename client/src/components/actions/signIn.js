@@ -16,8 +16,6 @@ export async function signIn(authRequest) {
     userModel.token = data.token;
     userModel.person = data.person;
     marksModel.currentPerson = data.person;
-    console.log(data.token)
-    console.log(data.person)
     localStorage.setItem("person",JSON.stringify(userModel.person));
     localStorage.setItem("token",JSON.stringify(userModel.token));
 }

@@ -11,6 +11,7 @@ class Login extends Component {
     state = {
         username: '',
         password: '',
+        isRedirect: false
     }
 
     onLoginChange = event => {
@@ -45,7 +46,17 @@ class Login extends Component {
         });
     }
 
+    onRedirect = () => {
+        this.setState({
+            isRedirect: true
+        })
+    }
+
     render() {
+
+        if (this.state.isRedirect) {
+            return <Redirect to='/signup'/>;
+        }
 
         if (userModel.token !== null) {
             return <Redirect to='/app'/>;
@@ -54,7 +65,10 @@ class Login extends Component {
         return  <div className="login-page">
 
             <div className="menubar">
-                <button className="login-page__registration-button">
+                <button
+                    className="login-page__registration-button"
+                    onClick={this.onRedirect}
+                >
                     Регистрация
                 </button>
             </div>

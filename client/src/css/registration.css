@@ -99,7 +99,6 @@
     opacity: 0.5;
     font-size: 18px;
     line-height: 23px;
-    text-transform: lowercase;
 }
 
 .registration-page-frame-cell:focus,

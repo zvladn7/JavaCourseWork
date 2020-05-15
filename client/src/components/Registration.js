@@ -5,6 +5,9 @@ import {loadGroups} from "./actions/groups/loadGroups";
 import {studentsModel} from "../model/StudentsModel";
 import {groupModel} from "../model/GroupModel";
 import {observer} from "mobx-react";
+import {Redirect} from "react-router-dom";
+import {toJS} from "mobx";
+import {signUp} from "./actions/signUp";
 
 @observer
 class Registration extends Component {
@@ -16,7 +19,15 @@ class Registration extends Component {
         studentsModel.selectedGroups = [];
 
         this.state = {
-            options: []
+            options: [],
+            isRedirect: false,
+            username: '',
+            password: '',
+            first_name: '',
+            last_name: '',
+            father_name: '',
+            group: '',
+            isStudent: true
         }
     }
 
@@ -35,7 +46,73 @@ class Registration extends Component {
         console.log(newOptions)
     }
 
+    onRedirect = () => {
+        this.setState({
+            isRedirect: true
+        })
+    }
+
+    onUsernameChange = event => {
+        this.setState({
+            username: event.target.value
+        });
+    }
+
+    onPasswordChange = event => {
+        this.setState({
+            password: event.target.value
+        });
+    }
+
+    onFirstNameChange = event => {
+        this.setState({
+            first_name: event.target.value
+        });
+    }
+
+    onLastNameChange = event => {
+        this.setState({
+            last_name: event.target.value
+        });
+    }
+
+    onFatherNameChange = event => {
+        this.setState({
+            father_name: event.target.value
+        });
+    }
+
+    onToggleClick = () => {
+        this.setState({
+            isStudent: !this.state.isStudent
+        })
+    }
+
+    onSignUp = () => {
+        signUp({
+            username   : this.state.username,
+            password   : this.state.password,
+            isStudent  : this.state.isStudent,
+            first_name : this.state.first_name,
+            last_name  : this.state.last_name,
+            father_name: this.state.father_name,
+            group	   : studentsModel.selectedGroups
+        })
+        this.onRedirect();
+    }
+
     render() {
+        console.log('username', this.state.username);
+        console.log('password', this.state.password);
+        console.log('first name', this.state.first_name);
+        console.log('last name', this.state.last_name);
+        console.log('father name', this.state.father_name);
+        console.log('group', toJS(studentsModel.selectedGroups));
+        console.log('student', this.state.isStudent);
+
+        if (this.state.isRedirect) {
+            return <Redirect to='/'/>;
+        }
 
         if (studentsModel.isGroupsLoaded) {
             this.onOptionChange();
@@ -44,7 +121,10 @@ class Registration extends Component {
         return <div className="registration-page">
 
             <div className="menubar">
-                <button className="registration-page__singup-button">
+                <button
+                    className="registration-page__singup-button"
+                    onClick={this.onRedirect}
+                >
                     Вход
                 </button>
             </div>
@@ -60,13 +140,15 @@ class Registration extends Component {
                             type="email"
                             autoFocus
                             placeholder="логин"
-                            name="login"
+                            name="username"
+                            onChange={this.onUsernameChange}
                         />
                         <input
                             className="pass"
                             type="password"
                             placeholder="пароль"
                             name="password"
+                            onChange={this.onPasswordChange}
                         />
                         <input
                             className="registration-page-frame-cell"
@@ -74,6 +156,7 @@ class Registration extends Component {
                             autoFocus
                             placeholder="имя"
                             name="first_name"
+                            onChange={this.onFirstNameChange}
                         />
                         <input
                             className="registration-page-frame-cell"
@@ -81,6 +164,7 @@ class Registration extends Component {
                             autoFocus
                             placeholder="фамилия"
                             name="last_name"
+                            onChange={this.onLastNameChange}
                         />
                         <input
                             className="registration-page-frame-cell"
@@ -88,10 +172,11 @@ class Registration extends Component {
                             autoFocus
                             placeholder="отчество"
                             name="father_name"
+                            onChange={this.onFatherNameChange}
                         />
                         <CustomSelect
                             options={this.state.options}
-                            isMulti={true}
+                            isMulti={false}
                             placeholder={'Group'}
                             isGroupSelect={true}
                         />
@@ -109,9 +194,9 @@ class Registration extends Component {
                                     name="private-event-toggle"
                                     type="checkbox"
                                     form="new-event-form"
-                                    value={this.state.isPrivate}
+                                    // value={this.state.isPrivate}
                                     tabIndex="6"
-                                    onChange={this.onPrivateClick}
+                                    onChange={this.onToggleClick}
                                 />
                                 <span></span>
                             </label>
@@ -126,6 +211,7 @@ class Registration extends Component {
                             type="submit"
                             value="Зарегистрироваться"
                             name="signUp"
+                            onClick={this.onSignUp}
                         />
                     </div>
                 </div>
