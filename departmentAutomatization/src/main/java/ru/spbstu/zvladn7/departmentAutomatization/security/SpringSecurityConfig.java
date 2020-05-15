@@ -33,6 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/signin").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/groups").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/marks/student/{id}").hasRole("STUDENT")
                 .anyRequest().authenticated()
                 .and()
