@@ -13,7 +13,11 @@ export async function loadPersonMarks(personId) {
         }
     });
 
-    marksModel.marks = await response.json();
+    if (response.status === 404) {
+        marksModel.marks = [];
+    } else if (response.status === 200) {
+        marksModel.marks = await response.json();
+    }
 
     marksModel.isPresent = true;
     console.log(toJS(marksModel.marks));
