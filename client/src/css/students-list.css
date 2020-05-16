@@ -1,3 +1,13 @@
+.department__students-list-add {
+    margin: 0 auto;
+    width: 50px;
+    height: 50px;
+}
+
+.department__students-list-add-button {
+    border-radius: 50px;
+}
+
 .department__students-list {
     position: relative;
     width: 80%;

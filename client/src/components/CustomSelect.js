@@ -13,7 +13,7 @@ class CustomSelect extends React.Component {
             position    : "relative",
             margin      : this.props.isGroupSelect ? '2% 2% 2% 12%' : "0 auto",
             color       : "gray",
-            zIndex      : 100
+            zIndex      : this.props.isOpen ? 0 : 100
         }),
         placeholder: () => ({
             fontSize    : '18px',

@@ -8,6 +8,9 @@ export class GroupModel {
     @observable
     isPresent = false;
 
+    @observable
+    options = [];
+
 }
 
 export const groupModel = new GroupModel();

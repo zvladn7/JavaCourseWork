@@ -7,6 +7,7 @@ import {groupModel} from "../../model/GroupModel";
 import {loadGroups} from "../actions/groups/loadGroups";
 import {marksModel} from "../../model/MarksModel";
 import {menubarModel} from "../../model/MenubarModel";
+import '../../css/students-list.css'
 
 @observer
 class StudentList extends Component {
@@ -33,6 +34,7 @@ class StudentList extends Component {
         this.setState({
             options: newOptions
         })
+        groupModel.options = newOptions;
         studentsModel.dropGroupLoadedFlag();
     }
 
@@ -59,6 +61,7 @@ class StudentList extends Component {
                 isMulti={true}
                 placeholder={'Студенты всех групп'}
                 isStudentSelect={true}
+                isOpen={this.props.isOpen}
             />
             {
                 this.props.students.map((student,index) => {

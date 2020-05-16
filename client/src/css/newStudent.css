@@ -1,0 +1,92 @@
+.new-student-page {
+    position: static;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin-left: 8%;
+    background: #f2f2f2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    z-index: 200;
+    color: transparent;
+}
+
+.new-student-page__window {
+    height: 100%;
+}
+
+.new-student-page-frame {
+    border: 1px solid gray;
+    display: flex;
+    align-content: center;
+    width: 420px;
+    height: 480px;
+    margin: 0 auto;
+    box-shadow: inset 2px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.new-student-page__window-content {
+    width: 100%;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-student-page-header {
+    margin-top: 2%;
+    margin-bottom: 4%;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 1.2;
+    color: #CCCCCC;
+}
+
+.new-student-page-frame-cell {
+    padding-left: 2%;
+    margin: 2% 2% 2% 12%;
+    width: 300px;
+    height: 30px;
+    background: #f9f9f9;
+    box-shadow: inset 2px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    opacity: 0.5;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.new-student-page-frame-cell:focus {
+    outline: none;
+    border-color: #2f2f2f;
+    transition: .3s;
+}
+
+.createStudent {
+    margin: 8% 2% 4% 30%;
+    width: 150px;
+    height: 35px;
+    background: #f9f9fa;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    border-width: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 23px;
+    text-transform: lowercase;
+    color: #4f4f4f;
+    outline: none;
+}
+
+.createStudent:hover {
+    background: #F2F2F2;
+    transition: .1s;
+}
