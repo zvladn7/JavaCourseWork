@@ -32,7 +32,7 @@ public class TestDataInit implements CommandLineRunner {
                     "Adminov",
                     "Adminvich",
                     null,
-                    'T'
+                    'A'
             );
 
             person = personRepo.save(person);

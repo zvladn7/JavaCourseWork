@@ -24,7 +24,7 @@ class ItemsList extends Component {
             {
                 this.props.items.map((item, index) => {
                     return this.props.type === 'subjects'
-                        ?  userModel.person !== null && userModel.person.type === 'T'
+                        ?  userModel.person !== null && userModel.person.type === 'A'
                             ? <SubjectListItem
                                     key={item.id}
                                     item={item}
@@ -37,7 +37,7 @@ class ItemsList extends Component {
                                 number={index + 1}
                                 name={item.name}
                             />
-                        : userModel.person !== null && userModel.person.type === 'T'
+                        : userModel.person !== null && userModel.person.type === 'A'
                             ? <GroupsListItem
                                     key={item.id}
                                     item={item}

@@ -20,7 +20,7 @@ class ViewCrudPage extends Component {
             </h1>
             <div className="department__list-component">
 
-                {userModel.person !== null && userModel.person.type === 'T'
+                {userModel.person !== null && userModel.person.type === 'A'
                     ? <AddItem
                         createElement={this.props.createElement}
                         addInputPlaceholder={this.props.addInputPlaceholder}
