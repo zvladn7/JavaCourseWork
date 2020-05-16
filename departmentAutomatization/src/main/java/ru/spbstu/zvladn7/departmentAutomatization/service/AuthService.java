@@ -20,8 +20,8 @@ import java.util.Optional;
 @Service
 public class AuthService {
 
-    private static final String STUDENT = "STUDENT";
-    private static final String TEACHER = "TEACHER";
+    private static final String STUDENT = "ROLE_STUDENT";
+    private static final String TEACHER = "ROLE_TEACHER";
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -60,11 +60,11 @@ public class AuthService {
         return map;
     }
 
-    public boolean signUp(AuthRequest authRequest) {
+    public Person signUp(AuthRequest authRequest) {
         String username = authRequest.getUsername();
         Optional<User> user = userRepo.findByUsername(username);
         if (user.isPresent()) {
-            return false;
+            return null;
         }
 
         Person person = new Person(
@@ -86,6 +86,6 @@ public class AuthService {
 
         userRepo.save(newUser);
 
-        return true;
+        return person;
     }
 }

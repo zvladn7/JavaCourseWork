@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.spbstu.zvladn7.departmentAutomatization.entity.Person;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.dto.AuthRequest;
 import ru.spbstu.zvladn7.departmentAutomatization.service.AuthService;
 
@@ -35,12 +36,13 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity singUp(@RequestBody AuthRequest authRequest) {
-        if (!authService.signUp(authRequest)) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<AuthRequest> singUp(@RequestBody AuthRequest authRequest) {
+        Person person = authService.signUp(authRequest);
+        if (person == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<>(authRequest, HttpStatus.CREATED);
     }
 
 }

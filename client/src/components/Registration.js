@@ -92,7 +92,7 @@ class Registration extends Component {
         signUp({
             username   : this.state.username,
             password   : this.state.password,
-            isStudent  : this.state.isStudent,
+            student  : this.state.isStudent,
             first_name : this.state.first_name,
             last_name  : this.state.last_name,
             father_name: this.state.father_name,
