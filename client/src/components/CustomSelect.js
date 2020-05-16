@@ -13,7 +13,7 @@ class CustomSelect extends React.Component {
             position    : "relative",
             margin      : this.props.isGroupSelect ? '2% 2% 2% 12%' : "0 auto",
             color       : "gray",
-            zIndex      : this.props.isOpen ? 0 : 100
+            zIndex      : studentsModel.isModalWindowOpen ? 0 : 100
         }),
         placeholder: () => ({
             fontSize    : '18px',
@@ -67,6 +67,7 @@ class CustomSelect extends React.Component {
 
         return (
             <Select
+                style={{zIndex: studentsModel.isModalWindowOpen ? 0 : 100}}
                 name="form"
                 value={selectedOption}
                 onChange={this.handleChange}

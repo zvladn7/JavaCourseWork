@@ -24,20 +24,13 @@ const customUserEditStyles = {
 @observer
 class Students extends Component {
 
-    state = {
-        isOpen: false
-    }
 
     closeModal = () => {
-        this.setState({
-            isOpen: false
-        });
+        studentsModel.isModalWindowOpen = false;
     }
 
     openModal = () => {
-        this.setState({
-            isOpen: true
-        });
+        studentsModel.isModalWindowOpen = true;
     }
 
     render() {
@@ -57,7 +50,7 @@ class Students extends Component {
         return <div>
             <Modal
                 style={customUserEditStyles}
-                isOpen={this.state.isOpen}
+                isOpen={studentsModel.isModalWindowOpen}
                 onRequestClose={this.closeModal}
             >
                 <AddStudent/>
@@ -75,7 +68,6 @@ class Students extends Component {
             </div>
             <StudentList
                 students={studentsModel.filteredStudents}
-                isOpen={this.state.isOpen}
             />
         </div>
     }

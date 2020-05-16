@@ -20,6 +20,9 @@ export class StudentsModel {
     @observable
     selectedGroups = [];
 
+    @observable
+    isModalWindowOpen = false;
+
     @action
     dropGroupLoadedFlag() {
         this.isGroupsLoaded = false;

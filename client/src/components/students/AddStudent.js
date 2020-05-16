@@ -5,7 +5,7 @@ import {studentsModel} from "../../model/StudentsModel";
 import {groupModel} from "../../model/GroupModel";
 import {observer} from "mobx-react";
 import {toJS} from "mobx";
-import {signUp} from "../actions/signUp";
+import {addStudent} from "../actions/students/addStudent";
 
 @observer
 class AddStudent extends Component {
@@ -62,13 +62,15 @@ class AddStudent extends Component {
 
 
     addStudent = () => {
-        signUp({
-            student    : true,
+        addStudent({
             first_name : this.state.first_name,
             last_name  : this.state.last_name,
             father_name: this.state.father_name,
             group	   : studentsModel.selectedGroups,
+            type       : 'S'
         })
+        studentsModel.selectedGroups = [];
+        studentsModel.isModalWindowOpen = false;
         this.onRedirect();
     }
 
