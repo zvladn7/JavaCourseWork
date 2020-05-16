@@ -28,6 +28,7 @@ class ViewCrudPage extends Component {
                     editElement={this.props.editElement}
                     removeElement={this.props.removeElement}
                     isItemsPresent={this.props.isItemsPresent}
+                    type={this.props.type}
                 />
             </div>
         </div>

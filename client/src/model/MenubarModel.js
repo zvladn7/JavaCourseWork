@@ -1,5 +1,4 @@
 import {action, observable} from 'mobx'
-import {Redirect} from 'react-router-dom';
 import React from "react";
 
 export class MenubarModel {
@@ -12,13 +11,13 @@ export class MenubarModel {
     * 4 - students selected
     * */
     @observable
-    selectedMenubarItem = '1';
+    selectedMenubarItem = null;
 
     @observable
     isSelectedMenubarItemChanged = false;
 
     @observable
-    selectedPage = 'subjects';
+    selectedPage = null;
 
     @action
     redirect = (value) => {
@@ -37,6 +36,9 @@ export class MenubarModel {
                 break;
             default:
         }
+        localStorage.setItem("selectedMenubarItem",JSON.stringify(this.selectedMenubarItem));
+        localStorage.setItem("selectedPage",JSON.stringify(this.selectedPage));
+
         this.isSelectedMenubarItemChanged = false;
     };
 

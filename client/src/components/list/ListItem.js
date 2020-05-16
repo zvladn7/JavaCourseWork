@@ -5,7 +5,7 @@ import {observer} from "mobx-react";
 class ListItem extends Component {
 
     state = {
-        name: this.props.item.name,
+        name: this.props.name,
         isEditEnable: false,
         editSaveButtonText: 'edit',
     }

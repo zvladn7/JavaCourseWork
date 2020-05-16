@@ -33,6 +33,7 @@ class App extends Component {
                     removeElement={(itemId) => removeSubject(itemId)}
                     addInputPlaceholder={'Добавить предмет'}
                     isItemsPresent={subjectModel.isPresent}
+                    type={'subjects'}
                 />;
             case 'groups':
                 return <ViewCrudPage
@@ -44,6 +45,7 @@ class App extends Component {
                     removeElement={(itemId) => removeGroup(itemId)}
                     addInputPlaceholder={'Создать группу'}
                     isItemsPresent={groupModel.isPresent}
+                    type={'groups'}
                 />;
             case 'marks':
                 return <Marks/>
@@ -63,6 +65,7 @@ class App extends Component {
             <div className="App">
                 <MenuBar/>
                 {this.selectPageOnBar()}
+
             </div>
         );
     }
