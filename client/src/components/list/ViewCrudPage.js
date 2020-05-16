@@ -4,6 +4,7 @@ import '../../css/list.css';
 import ItemsList from "./ItemsList";
 import {observer} from "mobx-react";
 import {menubarModel} from "../../model/MenubarModel";
+import {userModel} from "../../model/UserModel";
 
 @observer
 class ViewCrudPage extends Component {
@@ -18,10 +19,14 @@ class ViewCrudPage extends Component {
                 {this.props.header}
             </h1>
             <div className="department__list-component">
-                <AddItem
-                    createElement={this.props.createElement}
-                    addInputPlaceholder={this.props.addInputPlaceholder}
-                />
+
+                {userModel.person !== null && userModel.person.type === 'T'
+                    ? <AddItem
+                        createElement={this.props.createElement}
+                        addInputPlaceholder={this.props.addInputPlaceholder}
+                    />
+                    : null
+                }
                 <ItemsList
                     loadItems={this.props.loadItems}
                     items={this.props.items}

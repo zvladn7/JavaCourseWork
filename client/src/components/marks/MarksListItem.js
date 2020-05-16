@@ -11,12 +11,12 @@ class MarksListItem extends Component {
             </div>
             <div className="marks-list-item__teacher">
                 {this.props.mark.teacher.last_name + ' ' +
-                 this.props.mark.teacher.first_name + ' ' +
-                 this.props.mark.teacher.father_name}
+                 this.props.mark.teacher.first_name.substr(0, 1) + '. ' +
+                 this.props.mark.teacher.father_name.substr(0, 1) + '.'}
             </div>
             <div className="marks-list-item__distinct">
                 {   this.props.mark.value === 5
-                    ? <img className="marks-list-item__distinct-image" src={distinctImage}/>
+                    ? <img className="marks-list-item__distinct-image" src={distinctImage} alt="#"/>
                     : null
                 }
             </div>

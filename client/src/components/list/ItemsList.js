@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {observer} from "mobx-react";
 import {toJS} from "mobx";
-import GroupsListItem from "./GroupsListItem";
-import SubjectListItem from "./SubjectListItem";
+import GroupsListItem from "./editable/GroupsListItem";
+import SubjectListItem from "./editable/SubjectListItem";
+import {userModel} from "../../model/UserModel";
+import ListNotEditableItem from "./ListNotEditableItem";
 
 @observer
 class ItemsList extends Component {
@@ -20,22 +22,34 @@ class ItemsList extends Component {
 
         return <div className="department__list">
             {
-                this.props.items.map((item) => {
+                this.props.items.map((item, index) => {
                     return this.props.type === 'subjects'
-                        ?  <SubjectListItem
-                            key={item.id}
-                            item={item}
-                            name={item.name}
-                            editElement={this.props.editElement}
-                            removeElement={this.props.removeElement}
-                        />
-                        : <GroupsListItem
-                            key={item.id}
-                            item={item}
-                            name={item.name}
-                            editElement={this.props.editElement}
-                            removeElement={this.props.removeElement}
-                        />
+                        ?  userModel.person !== null && userModel.person.type === 'T'
+                            ? <SubjectListItem
+                                    key={item.id}
+                                    item={item}
+                                    name={item.name}
+                                    editElement={this.props.editElement}
+                                    removeElement={this.props.removeElement}
+                            />
+                            : <ListNotEditableItem
+                                key={item.key}
+                                number={index + 1}
+                                name={item.name}
+                            />
+                        : userModel.person !== null && userModel.person.type === 'T'
+                            ? <GroupsListItem
+                                    key={item.id}
+                                    item={item}
+                                    name={item.name}
+                                    editElement={this.props.editElement}
+                                    removeElement={this.props.removeElement}
+                            />
+                            : <ListNotEditableItem
+                                key={item.key}
+                                number={index + 1}
+                                name={item.name}
+                            />
                 })
             }
         </div>
