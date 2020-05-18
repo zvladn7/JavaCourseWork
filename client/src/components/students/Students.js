@@ -30,6 +30,7 @@ class Students extends Component {
 
     closeNewStudentModal = () => {
         studentsModel.isModalWindowOpen = false;
+        studentsModel.studentToEdit = null;
     }
 
     openNewStudentModal = () => {

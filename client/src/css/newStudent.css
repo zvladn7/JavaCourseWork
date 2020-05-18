@@ -6,7 +6,7 @@
     left: 0;
     margin-left: 8%;
     background: #f2f2f2;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     z-index: 200;
     color: transparent;
@@ -73,7 +73,7 @@
     width: 150px;
     height: 35px;
     background: #f9f9fa;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     border-width: 0;
     font-family: 'Open Sans', sans-serif;
@@ -89,4 +89,11 @@
 .createStudent:hover {
     background: #F2F2F2;
     transition: .1s;
+}
+
+.new-student-page-warning {
+    visibility: hidden;
+    color: red;
+    margin: 10% 4% 2% 0;
+    text-align: center;
 }

@@ -16,9 +16,9 @@ class AddStudent extends Component {
 
         if (studentsModel.studentToEdit === null) {
             this.state = {
-                first_name: '',
-                last_name: '',
-                father_name: '',
+                first_name: null,
+                last_name: null,
+                father_name: null,
                 group: null,
             }
         } else {
@@ -60,44 +60,55 @@ class AddStudent extends Component {
         this.setState({
             first_name: event.target.value
         });
+        document.getElementById("new-student-page-warning").style.visibility = 'hidden';
     }
 
     onLastNameChange = event => {
         this.setState({
             last_name: event.target.value
         });
+        document.getElementById("new-student-page-warning").style.visibility = 'hidden';
     }
 
     onFatherNameChange = event => {
         this.setState({
             father_name: event.target.value
         });
+        document.getElementById("new-student-page-warning").style.visibility = 'hidden';
     }
 
 
     addStudent = () => {
-        if (studentsModel.studentToEdit === null) {
-            addStudent({
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                father_name: this.state.father_name,
-                group: studentsModel.selectedGroups,
-                type: 'S'
-            });
+        if (this.state.first_name !== null
+            && this.state.last_name !== null
+            && this.state.father_name !== null
+            && studentsModel.selectedGroups.length !== 0
+        ) {
+            if (studentsModel.studentToEdit === null) {
+                addStudent({
+                    first_name: this.state.first_name,
+                    last_name: this.state.last_name,
+                    father_name: this.state.father_name,
+                    group: studentsModel.selectedGroups,
+                    type: 'S'
+                });
+            } else {
+                editStudent({
+                    id: studentsModel.studentToEdit.id,
+                    first_name: this.state.first_name,
+                    last_name: this.state.last_name,
+                    father_name: this.state.father_name,
+                    group: studentsModel.selectedGroups.length === 0 ? studentsModel.studentToEdit.group : studentsModel.selectedGroups,
+                    type: 'S'
+                });
+            }
+            studentsModel.selectedGroups = [];
+            studentsModel.isModalWindowOpen = false;
+            studentsModel.studentToEdit = null;
+            this.onRedirect();
         } else {
-            editStudent({
-                id: studentsModel.studentToEdit.id,
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                father_name: this.state.father_name,
-                group: studentsModel.selectedGroups.length === 0 ? studentsModel.studentToEdit.group : studentsModel.selectedGroups,
-                type: 'S'
-            });
+            document.getElementById("new-student-page-warning").style.visibility = 'visible';
         }
-        studentsModel.selectedGroups = [];
-        studentsModel.isModalWindowOpen = false;
-        studentsModel.studentToEdit = null;
-        this.onRedirect();
     }
 
     render() {
@@ -124,7 +135,7 @@ class AddStudent extends Component {
                             autoFocus
                             placeholder="имя"
                             name="first_name"
-                            value={this.state.first_name}
+                            value={this.state.first_name !== null ? this.state.first_name : ''}
                             onChange={this.onFirstNameChange}
                         />
                         <input
@@ -133,7 +144,7 @@ class AddStudent extends Component {
                             autoFocus
                             placeholder="фамилия"
                             name="last_name"
-                            value={this.state.last_name}
+                            value={this.state.last_name !== null ? this.state.last_name : ''}
                             onChange={this.onLastNameChange}
                         />
                         <input
@@ -142,7 +153,7 @@ class AddStudent extends Component {
                             autoFocus
                             placeholder="отчество"
                             name="father_name"
-                            value={this.state.father_name}
+                            value={this.state.father_name !== null ? this.state.father_name : ''}
                             onChange={this.onFatherNameChange}
                         />
                         <CustomSelect
@@ -159,6 +170,12 @@ class AddStudent extends Component {
                             name="add"
                             onClick={this.addStudent}
                         />
+                        <p
+                            id="new-student-page-warning"
+                            className="new-student-page-warning"
+                        >
+                            Заполните все поля
+                        </p>
                     </div>
                 </div>
             </div>
