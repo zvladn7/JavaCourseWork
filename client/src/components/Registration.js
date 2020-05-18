@@ -8,6 +8,7 @@ import {observer} from "mobx-react";
 import {Redirect} from "react-router-dom";
 import {toJS} from "mobx";
 import {signUp} from "./actions/signUp";
+import {userModel} from "../model/UserModel";
 
 @observer
 class Registration extends Component {
@@ -17,15 +18,16 @@ class Registration extends Component {
 
         loadGroups();
         studentsModel.selectedGroups = [];
+        userModel.isRedirect = false;
+
 
         this.state = {
             options: [],
-            isRedirect: false,
-            username: '',
-            password: '',
-            first_name: '',
-            last_name: '',
-            father_name: '',
+            username: null,
+            password: null,
+            first_name: null,
+            last_name: null,
+            father_name: null,
             group: '',
             isStudent: true
         }
@@ -47,58 +49,75 @@ class Registration extends Component {
     }
 
     onRedirect = () => {
-        this.setState({
-            isRedirect: true
-        })
+        userModel.isRedirect = true;
     }
 
     onUsernameChange = event => {
         this.setState({
             username: event.target.value
         });
+        document.getElementById("registration-page-warning").style.visibility = 'hidden';
+        userModel.isRegistrationSucceed = true;
     }
 
     onPasswordChange = event => {
         this.setState({
             password: event.target.value
         });
+        document.getElementById("registration-page-warning").style.visibility = 'hidden';
+        userModel.isRegistrationSucceed = true;
     }
 
     onFirstNameChange = event => {
         this.setState({
             first_name: event.target.value
         });
+        document.getElementById("registration-page-warning").style.visibility = 'hidden';
+        userModel.isRegistrationSucceed = true;
     }
 
     onLastNameChange = event => {
         this.setState({
             last_name: event.target.value
         });
+        document.getElementById("registration-page-warning").style.visibility = 'hidden';
+        userModel.isRegistrationSucceed = true;
     }
 
     onFatherNameChange = event => {
         this.setState({
             father_name: event.target.value
         });
+        document.getElementById("registration-page-warning").style.visibility = 'hidden';
+        userModel.isRegistrationSucceed = true;
     }
 
     onToggleClick = () => {
         this.setState({
             isStudent: !this.state.isStudent
-        })
+        });
     }
 
     onSignUp = () => {
-        signUp({
-            username   : this.state.username,
-            password   : this.state.password,
-            student  : this.state.isStudent,
-            first_name : this.state.first_name,
-            last_name  : this.state.last_name,
-            father_name: this.state.father_name,
-            group	   : studentsModel.selectedGroups
-        })
-        this.onRedirect();
+        if (this.state.username !== null && this.state.username !== ''
+            && this.state.password !== null && this.state.password !== ''
+            && this.state.first_name !== null && this.state.first_name !== ''
+            && this.state.last_name !== null && this.state.last_name !== ''
+            && this.state.father_name !== null && this.state.father_name !== ''
+            && studentsModel.selectedGroups.length !== 0
+        ) {
+            signUp({
+                username: this.state.username,
+                password: this.state.password,
+                student: this.state.isStudent,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                father_name: this.state.father_name,
+                group: studentsModel.selectedGroups
+            }, document.getElementById("registration-page-warning"))
+        } else {
+            document.getElementById("registration-page-warning").style.visibility = 'visible';
+        }
     }
 
     render() {
@@ -110,7 +129,7 @@ class Registration extends Component {
         console.log('group', toJS(studentsModel.selectedGroups));
         console.log('student', this.state.isStudent);
 
-        if (this.state.isRedirect) {
+        if (userModel.isRedirect) {
             return <Redirect to='/'/>;
         }
 
@@ -213,6 +232,12 @@ class Registration extends Component {
                             name="signUp"
                             onClick={this.onSignUp}
                         />
+                        <p
+                            id="registration-page-warning"
+                            className="registration-page-page-warning"
+                        >
+                            {userModel.isRegistrationSucceed ? 'Заполните все поля' : 'Пользователь уже существует'}
+                        </p>
                     </div>
                 </div>
             </div>

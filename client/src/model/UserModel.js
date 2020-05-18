@@ -10,6 +10,12 @@ export class UserModel {
 
     @observable
     isPresent = false;
+
+    @observable
+    isRegistrationSucceed = true;
+
+    @observable
+    isRedirect = false;
 }
 
 export const userModel = new UserModel();
