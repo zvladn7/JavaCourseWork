@@ -1,5 +1,6 @@
 import {subjectModel} from "../../../model/SubjectModel";
 import {userModel} from "../../../model/UserModel";
+import {marksModel} from "../../../model/MarksModel";
 
 export async function loadSubject() {
 
@@ -11,11 +12,10 @@ export async function loadSubject() {
             "Authorization": "Token " + userModel.token
         }
     });
-    // console.log('1',subjectModel.subjects);
 
     subjectModel.subjects = await response.json();
-    // console.log('2',subjectModel.subjects);
 
 
     subjectModel.isPresent = true;
+    marksModel.isSubjectLoaded = true;
 }

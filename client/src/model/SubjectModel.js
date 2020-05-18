@@ -8,6 +8,12 @@ export class SubjectModel {
     @observable
     isPresent = false;
 
+    @observable
+    options = [];
+
+    @observable
+    selectedSubject = null;
+
 }
 
 export const subjectModel = new SubjectModel();

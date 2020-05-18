@@ -7,6 +7,8 @@ import {loadStudents} from "../actions/students/loadStudents";
 import Modal from "react-modal";
 import AddStudent from "./AddStudent";
 import {userModel} from "../../model/UserModel";
+import AddNewMark from "./AddNewMark";
+import {marksModel} from "../../model/MarksModel";
 
 
 const customUserEditStyles = {
@@ -26,12 +28,16 @@ const customUserEditStyles = {
 class Students extends Component {
 
 
-    closeModal = () => {
+    closeNewStudentModal = () => {
         studentsModel.isModalWindowOpen = false;
     }
 
-    openModal = () => {
+    openNewStudentModal = () => {
         studentsModel.isModalWindowOpen = true;
+    }
+
+    closeNewMarkModal = () => {
+        marksModel.isNewMarkModalOpen = false;
     }
 
     render() {
@@ -52,9 +58,16 @@ class Students extends Component {
             <Modal
                 style={customUserEditStyles}
                 isOpen={studentsModel.isModalWindowOpen}
-                onRequestClose={this.closeModal}
+                onRequestClose={this.closeNewStudentModal}
             >
                 <AddStudent/>
+            </Modal>
+            <Modal
+                style={customUserEditStyles}
+                isOpen={marksModel.isNewMarkModalOpen}
+                onRequestClose={this.closeNewMarkModal}
+            >
+                <AddNewMark/>
             </Modal>
             <h1 className="department__-list-component-header">
                 Студенты
@@ -63,7 +76,7 @@ class Students extends Component {
                 ? <div className="department__students-list-add">
                     <button
                         className="department__students-list-add-button"
-                        onClick={this.openModal}
+                        onClick={this.openNewStudentModal}
                     >
                         Добавить студента
                     </button>

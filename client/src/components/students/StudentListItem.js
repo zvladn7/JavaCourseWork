@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {observer} from "mobx-react";
 import {userModel} from "../../model/UserModel";
 import {studentsModel} from "../../model/StudentsModel";
+import {marksModel} from "../../model/MarksModel";
 
 @observer
 class StudentListItem extends Component {
@@ -9,6 +10,11 @@ class StudentListItem extends Component {
     onStudentEdit = () => {
         studentsModel.isModalWindowOpen = true;
         studentsModel.studentToEdit = this.props.student;
+    }
+
+    onNewMarkClick = () => {
+        marksModel.isNewMarkModalOpen = true;
+        marksModel.studentToNewMark = this.props.student;
     }
 
     render() {
@@ -35,7 +41,7 @@ class StudentListItem extends Component {
                 || userModel.person.type === 'T')
                 ? <button
                     className="student-list-item__add-mark"
-                    onClick={ this.onDelete }
+                    onClick={ this.onNewMarkClick }
                 >
                     Поставить<br/>оценку
                 </button>

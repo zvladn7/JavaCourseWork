@@ -1,4 +1,4 @@
-import {observable} from 'mobx'
+import {action, observable} from 'mobx'
 
 export class MarksModel {
 
@@ -10,6 +10,20 @@ export class MarksModel {
 
     @observable
     currentPerson = null;
+
+    @observable
+    isNewMarkModalOpen = false;
+
+    @observable
+    isSubjectLoaded = false; //for new mark modal window
+
+    @observable
+    studentToNewMark = null;
+
+    @action
+    dropSubjectLoadedFlag() {
+        this.isSubjectLoaded = false;
+    }
 
 }
 

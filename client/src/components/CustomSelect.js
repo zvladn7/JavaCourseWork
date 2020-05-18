@@ -8,12 +8,12 @@ class CustomSelect extends React.Component {
 
     customStyles = {
         container: () => ({
-            minWidth    : this.props.isGroupSelect ? "0" : '100%',
-            width       : this.props.isGroupSelect ? "315px" : "-1",
+            minWidth    : this.props.isGroupSelect || this.props.isMarkSelect || this.props.isSubjectSelect ? "0" : '100%',
+            width       : this.props.isGroupSelect || this.props.isMarkSelect || this.props.isSubjectSelect ? "315px" : "-1",
             position    : "relative",
-            margin      : this.props.isGroupSelect ? '2% 2% 2% 12%' : "0 auto",
+            margin      : this.props.isGroupSelect || this.props.isMarkSelect || this.props.isSubjectSelect ? '2% 2% 2% 12%' : "0 auto",
             color       : "gray",
-            zIndex      : studentsModel.isModalWindowOpen ? 0 : 100
+            zIndex      : studentsModel.isModalWindowOpen ? 0 : this.props.isSubjectSelect ? 120 : 100
         }),
         placeholder: () => ({
             fontSize    : '18px',
