@@ -11,8 +11,8 @@
 .department__students-list {
     position: relative;
     width: 80%;
-    max-width: 560px;
-    min-width: 480px;
+    max-width: 700px;
+    min-width: 600px;
     margin: 0 auto 20px;
     border: 1px solid #E6E6E6;
     background-color: #FFF;
@@ -35,6 +35,18 @@
 .student-list-item:hover {
     background-color: #E6E6E6;
     border: 1px solid #0867d4;
+}
+
+.student-list-item-link {
+    font-size: 24px;
+    height: 50px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    box-sizing: border-box;
+    border: 1px solid #E6E6E6;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 .student-list-item__number {
@@ -65,4 +77,22 @@
     width: 100%;
     display: flex;
     padding-left: 5%;
+}
+
+.student-list-item__add-mark {
+    position: relative;
+    width: 18%;
+    background: transparent;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.student-list-item__edit {
+    position: relative;
+    width: 18%;
+    background: transparent;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 12px;
 }

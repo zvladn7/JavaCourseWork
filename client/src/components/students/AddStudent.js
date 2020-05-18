@@ -6,6 +6,7 @@ import {groupModel} from "../../model/GroupModel";
 import {observer} from "mobx-react";
 import {toJS} from "mobx";
 import {addStudent} from "../actions/students/addStudent";
+import {editStudent} from "../actions/students/editStudent";
 
 @observer
 class AddStudent extends Component {
@@ -13,11 +14,24 @@ class AddStudent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            first_name: '',
-            last_name: '',
-            father_name: '',
-            group: '',
+        if (studentsModel.studentToEdit === null) {
+            this.state = {
+                first_name: '',
+                last_name: '',
+                father_name: '',
+                group: null,
+            }
+        } else {
+            this.state = {
+                first_name: studentsModel.studentToEdit.first_name,
+                last_name: studentsModel.studentToEdit.last_name,
+                father_name: studentsModel.studentToEdit.father_name,
+                group: {
+                    value: studentsModel.studentToEdit.group.name,
+                    label: studentsModel.studentToEdit.group.name,
+                    id: studentsModel.studentToEdit.group.id
+                }
+            }
         }
     }
 
@@ -62,15 +76,27 @@ class AddStudent extends Component {
 
 
     addStudent = () => {
-        addStudent({
-            first_name : this.state.first_name,
-            last_name  : this.state.last_name,
-            father_name: this.state.father_name,
-            group	   : studentsModel.selectedGroups,
-            type       : 'S'
-        })
+        if (studentsModel.studentToEdit === null) {
+            addStudent({
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                father_name: this.state.father_name,
+                group: studentsModel.selectedGroups,
+                type: 'S'
+            });
+        } else {
+            editStudent({
+                id: studentsModel.studentToEdit.id,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                father_name: this.state.father_name,
+                group: studentsModel.selectedGroups,
+                type: 'S'
+            });
+        }
         studentsModel.selectedGroups = [];
         studentsModel.isModalWindowOpen = false;
+        studentsModel.studentToEdit = null;
         this.onRedirect();
     }
 
@@ -98,6 +124,7 @@ class AddStudent extends Component {
                             autoFocus
                             placeholder="имя"
                             name="first_name"
+                            value={this.state.first_name}
                             onChange={this.onFirstNameChange}
                         />
                         <input
@@ -106,6 +133,7 @@ class AddStudent extends Component {
                             autoFocus
                             placeholder="фамилия"
                             name="last_name"
+                            value={this.state.last_name}
                             onChange={this.onLastNameChange}
                         />
                         <input
@@ -114,6 +142,7 @@ class AddStudent extends Component {
                             autoFocus
                             placeholder="отчество"
                             name="father_name"
+                            value={this.state.father_name}
                             onChange={this.onFatherNameChange}
                         />
                         <CustomSelect
@@ -121,6 +150,7 @@ class AddStudent extends Component {
                             isMulti={false}
                             placeholder={'Group'}
                             isGroupSelect={true}
+                            selectedGroup={this.state.group}
                         />
                         <input
                             className="createStudent"

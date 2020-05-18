@@ -70,12 +70,14 @@ class StudentList extends Component {
                     }
                     return <div
                         key={index}
-                        onClick={() => this.onLinkClicked(student)}
+                        // onClick={() => this.onLinkClicked(student)}
                     >
                         <StudentListItem
                             number={index}
                             studentFullName={student.last_name + ' ' + student.first_name + ' ' + student.father_name}
                             group={student.group.name}
+                            student={student}
+                            onClick={() => this.onLinkClicked(student)}
                         />
                     </div>
                 })

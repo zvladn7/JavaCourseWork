@@ -23,6 +23,9 @@ export class StudentsModel {
     @observable
     isModalWindowOpen = false;
 
+    @observable
+    studentToEdit = null;
+
     @action
     dropGroupLoadedFlag() {
         this.isGroupsLoaded = false;

@@ -6,6 +6,7 @@ import {studentsModel} from "../../model/StudentsModel";
 import {loadStudents} from "../actions/students/loadStudents";
 import Modal from "react-modal";
 import AddStudent from "./AddStudent";
+import {userModel} from "../../model/UserModel";
 
 
 const customUserEditStyles = {
@@ -58,14 +59,17 @@ class Students extends Component {
             <h1 className="department__-list-component-header">
                 Студенты
             </h1>
-            <div className="department__students-list-add">
-                <button
-                    className="department__students-list-add-button"
-                    onClick={this.openModal}
-                >
-                    Добавить студента
-                </button>
-            </div>
+            {userModel.person !== null && userModel.person.type === 'A'
+                ? <div className="department__students-list-add">
+                    <button
+                        className="department__students-list-add-button"
+                        onClick={this.openModal}
+                    >
+                        Добавить студента
+                    </button>
+                </div>
+                : null
+            }
             <StudentList
                 students={studentsModel.filteredStudents}
             />

@@ -39,9 +39,12 @@ class CustomSelect extends React.Component {
     constructor(props) {
         super(props);
 
+        const defaultOptions = this.props.isGroupSelect
+            ? this.props.selectedGroup === null ? null :  this.props.selectedGroup
+            : []
 
         this.state = {
-            selectedOption: this.props.isGroupSelect ? null : []
+            selectedOption: defaultOptions
         }
 
     }
