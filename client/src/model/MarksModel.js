@@ -20,6 +20,12 @@ export class MarksModel {
     @observable
     studentToNewMark = null;
 
+    @observable
+    selectedSubject = null;
+
+    @observable
+    selectedValue = null;
+
     @action
     dropSubjectLoadedFlag() {
         this.isSubjectLoaded = false;

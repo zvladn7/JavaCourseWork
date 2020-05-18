@@ -8,6 +8,8 @@ import {editStudent} from "../actions/students/editStudent";
 import {subjectModel} from "../../model/SubjectModel";
 import {loadSubject} from "../actions/subjects/loadSubjects";
 import {marksModel} from "../../model/MarksModel";
+import {createNewMark} from "../actions/marks/createNewMark";
+import {userModel} from "../../model/UserModel";
 
 const marksOptions = [
     {value: 5, label: 'Отлично'},
@@ -47,27 +49,16 @@ class AddNewMark extends Component {
 
 
     addMark = () => {
-        if (studentsModel.studentToEdit === null) {
-            addStudent({
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                father_name: this.state.father_name,
-                group: studentsModel.selectedGroups,
-                type: 'S'
-            });
-        } else {
-            editStudent({
-                id: studentsModel.studentToEdit.id,
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                father_name: this.state.father_name,
-                group: studentsModel.selectedGroups,
-                type: 'S'
-            });
-        }
-        studentsModel.selectedGroups = [];
-        studentsModel.isModalWindowOpen = false;
-        studentsModel.studentToEdit = null;
+        createNewMark({
+            student : marksModel.studentToNewMark,
+            subject : marksModel.selectedSubject,
+            teacher : userModel.person,
+            value   : marksModel.selectedValue
+        })
+        marksModel.selectedValue = null;
+        marksModel.selectedValue = null;
+        // marksModel.studentToNewMark = null;
+        marksModel.isNewMarkModalOpen = false;
     }
 
     render() {
@@ -110,7 +101,7 @@ class AddNewMark extends Component {
                             type="submit"
                             value="Добавить"
                             name="add"
-                            // onClick={this.addMark}
+                            onClick={this.addMark}
                         />
                     </div>
                 </div>

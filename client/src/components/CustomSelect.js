@@ -2,6 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import {observer} from "mobx-react";
 import {studentsModel} from "../model/StudentsModel";
+import {marksModel} from "../model/MarksModel";
 
 @observer
 class CustomSelect extends React.Component {
@@ -59,9 +60,14 @@ class CustomSelect extends React.Component {
                 studentsModel.selectedGroups = [];
             }
         }
-
         if (this.props.isGroupSelect) {
             studentsModel.selectedGroups = { id: selectedOption.id };
+        }
+        if (this.props.isSubjectSelect) {
+            marksModel.selectedSubject = { id: selectedOption.id }
+        }
+        if (this.props.isMarkSelect) {
+            marksModel.selectedValue = selectedOption.value;
         }
     };
 
