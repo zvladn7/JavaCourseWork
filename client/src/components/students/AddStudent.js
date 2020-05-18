@@ -90,7 +90,7 @@ class AddStudent extends Component {
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
                 father_name: this.state.father_name,
-                group: studentsModel.selectedGroups,
+                group: studentsModel.selectedGroups.length === 0 ? studentsModel.studentToEdit.group : studentsModel.selectedGroups,
                 type: 'S'
             });
         }

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import '../../css/addNewMark.css';
 import CustomSelect from "../CustomSelect";
-import {studentsModel} from "../../model/StudentsModel";
 import {observer} from "mobx-react";
-import {addStudent} from "../actions/students/addStudent";
-import {editStudent} from "../actions/students/editStudent";
 import {subjectModel} from "../../model/SubjectModel";
 import {loadSubject} from "../actions/subjects/loadSubjects";
 import {marksModel} from "../../model/MarksModel";
 import {createNewMark} from "../actions/marks/createNewMark";
 import {userModel} from "../../model/UserModel";
+import {toJS} from "mobx";
 
 const marksOptions = [
     {value: 5, label: 'Отлично'},
@@ -49,19 +47,27 @@ class AddNewMark extends Component {
 
 
     addMark = () => {
-        createNewMark({
-            student : marksModel.studentToNewMark,
-            subject : marksModel.selectedSubject,
-            teacher : userModel.person,
-            value   : marksModel.selectedValue
-        })
-        marksModel.selectedValue = null;
-        marksModel.selectedValue = null;
-        // marksModel.studentToNewMark = null;
-        marksModel.isNewMarkModalOpen = false;
+        if (marksModel.selectedValue !== null && marksModel.selectedSubject !== null) {
+            createNewMark({
+                student: marksModel.studentToNewMark,
+                subject: marksModel.selectedSubject,
+                teacher: userModel.person,
+                value: marksModel.selectedValue
+            })
+            marksModel.selectedValue = null;
+            marksModel.selectedValue = null;
+            marksModel.isNewMarkModalOpen = false;
+        } else {
+            document.getElementById("new-student-mark-page-warning").style.visibility = 'visible';
+        }
     }
 
     render() {
+
+        console.log('student', toJS(marksModel.studentToNewMark));
+        console.log('subject', marksModel.selectedSubject);
+        console.log('teacher', toJS(userModel.person));
+        console.log('value', marksModel.selectedValue);
 
         if (marksModel.isSubjectLoaded) {
             this.onOptionChange();
@@ -103,6 +109,12 @@ class AddNewMark extends Component {
                             name="add"
                             onClick={this.addMark}
                         />
+                        <p
+                            id="new-student-mark-page-warning"
+                            className="new-student-mark-page-warning"
+                        >
+                            Заполните все поля
+                        </p>
                     </div>
                 </div>
             </div>
