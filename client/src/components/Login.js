@@ -19,6 +19,7 @@ class Login extends Component {
             username: event.target.value
         });
         console.log(event.target.value);
+        document.getElementById("login-page-warning").style.visibility = 'hidden';
     }
 
     onPasswordChange = event => {
@@ -26,6 +27,7 @@ class Login extends Component {
             password: event.target.value
         });
         console.log(event.target.value);
+        document.getElementById("login-page-warning").style.visibility = 'hidden';
     }
 
     onSignInClick = event => {
@@ -34,16 +36,11 @@ class Login extends Component {
         const currentUsername = this.state.username;
         const currentPassword = this.state.password;
 
-
         signIn({
             username: currentUsername,
             password: currentPassword
-        });
+        }, document.getElementById("login-page-warning"));
 
-        this.setState({
-            username: '',
-            password: '',
-        });
     }
 
     onRedirect = () => {
@@ -101,6 +98,12 @@ class Login extends Component {
                             name="signIn"
                             onClick={this.onSignInClick}
                         />
+                        <p
+                            id="login-page-warning"
+                            className="login-page-warning"
+                        >
+                            Неверный логин или пароль
+                        </p>
                     </div>
                 </div>
             </div>

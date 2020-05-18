@@ -8,6 +8,8 @@ export class UserModel {
     @observable
     person = null;
 
+    @observable
+    isPresent = false;
 }
 
 export const userModel = new UserModel();

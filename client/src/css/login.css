@@ -5,7 +5,7 @@
     right: 0;
     left: 0;
     background: #f2f2f2;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -115,7 +115,7 @@
     width: 85px;
     height: 35px;
     background: #f9f9fa;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
     border-width: 0;
     font-family: "Oxygen", sans-serif;
@@ -131,4 +131,11 @@
 .signIn:hover {
     background: #F2F2F2;
     transition: .1s;
+}
+
+.login-page-warning {
+    visibility: hidden;
+    color: red;
+    margin: 10% 2% 2% 0;
+    text-align: center;
 }
