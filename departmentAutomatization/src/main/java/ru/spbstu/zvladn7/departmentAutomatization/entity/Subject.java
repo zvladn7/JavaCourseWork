@@ -19,7 +19,7 @@ public class Subject {
 
     @Column(length = 50)
     @NotBlank(message = "The name of subject may not be blank")
-    @Size(min = 3, max = 50, message = "Subject name length must be between 3 and 50")
+    @Size(max = 50, message = "Subject name length must be between 3 and 50")
     private String name;
 
 }
