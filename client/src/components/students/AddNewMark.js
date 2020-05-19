@@ -83,7 +83,7 @@ class AddNewMark extends Component {
                         <div
                             className="new-student-mark-page-frame-cell"
                         >
-                            {marksModel.studentToNewMark.last_name + ' ' + marksModel.studentToNewMark.first_name + ' ' + marksModel.studentToNewMark.father_name}
+                            {marksModel.studentToNewMark.lastname + ' ' + marksModel.studentToNewMark.firstname + ' ' + marksModel.studentToNewMark.fathername}
                         </div>
                         <div
                             className="new-student-mark-page-frame-cell-group"

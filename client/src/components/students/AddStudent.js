@@ -23,9 +23,9 @@ class AddStudent extends Component {
             }
         } else {
             this.state = {
-                first_name: studentsModel.studentToEdit.first_name,
-                last_name: studentsModel.studentToEdit.last_name,
-                father_name: studentsModel.studentToEdit.father_name,
+                first_name: studentsModel.studentToEdit.firstname,
+                last_name: studentsModel.studentToEdit.lastname,
+                father_name: studentsModel.studentToEdit.fathername,
                 group: {
                     value: studentsModel.studentToEdit.group.name,
                     label: studentsModel.studentToEdit.group.name,
