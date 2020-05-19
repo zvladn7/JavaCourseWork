@@ -15,6 +15,7 @@ export async function loadStudents() {
     studentsModel.students = await response.json();
     studentsModel.filterStudents();
 
+    console.log(toJS(studentsModel.students));
 
     studentsModel.isPresent = true;
 }

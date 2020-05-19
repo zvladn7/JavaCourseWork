@@ -86,18 +86,18 @@ class AddStudent extends Component {
         ) {
             if (studentsModel.studentToEdit === null) {
                 addStudent({
-                    first_name: this.state.first_name,
-                    last_name: this.state.last_name,
-                    father_name: this.state.father_name,
+                    firstname: this.state.first_name,
+                    lastname: this.state.last_name,
+                    fathername: this.state.father_name,
                     group: studentsModel.selectedGroups,
                     type: 'S'
                 });
             } else {
                 editStudent({
                     id: studentsModel.studentToEdit.id,
-                    first_name: this.state.first_name,
-                    last_name: this.state.last_name,
-                    father_name: this.state.father_name,
+                    firstname: this.state.first_name,
+                    lastname: this.state.last_name,
+                    fathername: this.state.father_name,
                     group: studentsModel.selectedGroups.length === 0 ? studentsModel.studentToEdit.group : studentsModel.selectedGroups,
                     type: 'S'
                 });

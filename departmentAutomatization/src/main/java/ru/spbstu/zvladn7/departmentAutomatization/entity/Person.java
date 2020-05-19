@@ -21,17 +21,17 @@ public class Person {
     @Column(length = 20)
     @NotBlank(message = "Person name may not be blank")
     @Size(max = 20, message = "Length of name may not be more than 20")
-    private String first_name;
+    private String firstname;
 
     @Column(length = 20)
     @NotBlank(message = "Person surname may not be blank")
     @Size(max = 20, message = "Length of surname may not be more than 20")
-    private String last_name;
+    private String lastname;
 
     @Column(length = 20)
     @NotBlank(message = "Person father name may not be blank")
     @Size(max = 20, message = "Length of father name may not be more than 20")
-    private String father_name;
+    private String fathername;
 
     @ManyToOne(targetEntity = Group.class)
     private Group group;
@@ -40,10 +40,10 @@ public class Person {
     @NotNull(message = "Type of person may not be null")
     private char type;
 
-    public Person(String first_name, String last_name, String father_name, Group group, char type) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.father_name = father_name;
+    public Person(String firstname, String lastname, String fathername, Group group, char type) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.fathername = fathername;
         this.group = group;
         this.type = type;
     }

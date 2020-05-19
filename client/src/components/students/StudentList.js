@@ -74,7 +74,7 @@ class StudentList extends Component {
                     >
                         <StudentListItem
                             number={index}
-                            studentFullName={student.last_name + ' ' + student.first_name + ' ' + student.father_name}
+                            studentFullName={student.lastname + ' ' + student.firstname + ' ' + student.fathername}
                             group={student.group.name}
                             student={student}
                             onClick={() => this.onLinkClicked(student)}
