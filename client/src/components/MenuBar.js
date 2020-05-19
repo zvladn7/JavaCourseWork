@@ -41,15 +41,18 @@ class MenuBar extends Component {
                 >
                     Группы
                 </button>
-                <button
-                    id="3"
-                    className={menubarModel.selectedMenubarItem === '3'
+                { userModel.person !== null && userModel.person.type === 'S'
+                    ? <button
+                        id="3"
+                        className={menubarModel.selectedMenubarItem === '3'
                         ? "menubar-item_selected"
                         : "menubar-item"}
-                    onClick={this.onMenuBarItemClicked}
-                >
-                    Оценки
-                </button>
+                        onClick={this.onMenuBarItemClicked}
+                    >
+                        Оценки
+                    </button>
+                    : null
+                }
                 <button
                     id="4"
                     className={menubarModel.selectedMenubarItem === '4'

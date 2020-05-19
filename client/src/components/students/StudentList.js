@@ -41,6 +41,7 @@ class StudentList extends Component {
     onLinkClicked = (person) => {
         marksModel.currentPerson = person;
         menubarModel.isSelectedMenubarItemChanged = true;
+        menubarModel.isFromStudentsClick = true;
         menubarModel.selectedMenubarItem = '3';
     }
 

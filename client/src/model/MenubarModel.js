@@ -1,5 +1,7 @@
 import {action, observable} from 'mobx'
 import React from "react";
+import {marksModel} from "./MarksModel";
+import {userModel} from "./UserModel";
 
 export class MenubarModel {
 
@@ -19,6 +21,9 @@ export class MenubarModel {
     @observable
     selectedPage = null;
 
+    @observable
+    isFromStudentsClick = false;
+
     @action
     redirect = (value) => {
         switch (value) {
@@ -29,6 +34,10 @@ export class MenubarModel {
                 this.selectedPage = 'groups'
                 break;
             case '3':
+                if (!this.isFromStudentsClick) {
+                    marksModel.currentPerson = userModel.person;
+                }
+                this.isFromStudentsClick = false;
                 this.selectedPage = 'marks'
                 break;
             case '4':
