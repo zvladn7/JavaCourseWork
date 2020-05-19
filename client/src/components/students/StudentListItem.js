@@ -36,9 +36,7 @@ class StudentListItem extends Component {
                     {this.props.studentFullName}
                 </div>
             </div>
-            { userModel.person !== null
-                && (userModel.person.type === 'A'
-                || userModel.person.type === 'T')
+            { userModel.person !== null && userModel.person.type === 'T'
                 ? <button
                     className="student-list-item__add-mark"
                     onClick={ this.onNewMarkClick }

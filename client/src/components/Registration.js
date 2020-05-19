@@ -104,7 +104,7 @@ class Registration extends Component {
             && this.state.first_name !== null && this.state.first_name !== ''
             && this.state.last_name !== null && this.state.last_name !== ''
             && this.state.father_name !== null && this.state.father_name !== ''
-            && studentsModel.selectedGroups.length !== 0
+            && (studentsModel.selectedGroups.length !== 0 || !this.state.isStudent)
         ) {
             signUp({
                 username: this.state.username,
@@ -113,7 +113,7 @@ class Registration extends Component {
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
                 father_name: this.state.father_name,
-                group: studentsModel.selectedGroups
+                group: this.state.isStudent ? studentsModel.selectedGroups : null
             }, document.getElementById("registration-page-warning"))
         } else {
             document.getElementById("registration-page-warning").style.visibility = 'visible';
@@ -193,12 +193,15 @@ class Registration extends Component {
                             name="father_name"
                             onChange={this.onFatherNameChange}
                         />
-                        <CustomSelect
-                            options={this.state.options}
-                            isMulti={false}
-                            placeholder={'Group'}
-                            isGroupSelect={true}
-                        />
+                        { this.state.isStudent
+                          ?  <CustomSelect
+                                options={this.state.options}
+                                isMulti={false}
+                                placeholder={'Group'}
+                                isGroupSelect={true}
+                            />
+                          : null
+                        }
                         <div className="registration-page-frame__toggle-container">
                             <div
                                 className="registration-page-frame__toggle-container_option"
