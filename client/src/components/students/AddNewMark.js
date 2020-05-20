@@ -9,6 +9,7 @@ import {createNewMark} from "../actions/marks/createNewMark";
 import {userModel} from "../../model/UserModel";
 import {toJS} from "mobx";
 import {studentsModel} from "../../model/StudentsModel";
+import {updateMark} from "../actions/marks/updateMark";
 
 const marksOptions = [
     {value: 5, label: 'Отлично'},
@@ -64,12 +65,22 @@ class AddNewMark extends Component {
 
     addMark = () => {
         if (marksModel.selectedValue !== null && marksModel.selectedSubject !== null) {
-            createNewMark({
-                student: marksModel.studentToNewMark,
-                subject: marksModel.selectedSubject,
-                teacher: userModel.person,
-                value: marksModel.selectedValue
-            })
+            if (marksModel.isEditMark) {
+                updateMark({
+                    id: marksModel.selectedMarkId,
+                    student: marksModel.studentToNewMark,
+                    subject: marksModel.selectedSubject,
+                    teacher: userModel.person,
+                    value: marksModel.selectedValue
+                })
+            } else {
+                createNewMark({
+                    student: marksModel.studentToNewMark,
+                    subject: marksModel.selectedSubject,
+                    teacher: userModel.person,
+                    value: marksModel.selectedValue
+                })
+            }
             marksModel.selectedValue = null;
             marksModel.selectedSubject = null;
             marksModel.isNewMarkModalOpen = false;

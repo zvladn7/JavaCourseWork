@@ -9,6 +9,7 @@ class MarksListItem extends Component {
     openChangeMarkModalWindow = () => {
         marksModel.selectedSubject = this.props.mark.subject;
         marksModel.selectedValue = this.props.mark.value;
+        marksModel.selectedMarkId = this.props.mark.id;
         marksModel.isEditMark = true;
         marksModel.isNewMarkModalOpen = true;
         marksModel.studentToNewMark = this.props.mark.student;
