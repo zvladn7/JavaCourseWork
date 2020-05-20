@@ -35,6 +35,8 @@ export class MenubarModel {
             case '3':
                 if (!this.isFromStudentsClick) {
                     marksModel.currentPerson = userModel.person;
+                    localStorage.setItem("currentPerson",JSON.stringify(null));
+                    marksModel.isPresent = false;
                 }
                 this.isFromStudentsClick = false;
                 this.selectedPage = 'marks'
