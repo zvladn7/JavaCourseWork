@@ -31,7 +31,7 @@ public class SubjectController {
 
     @GetMapping
     public ResponseEntity<Iterable<Subject>> getSubjects() {
-        return new ResponseEntity<>(subjectRepo.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(subjectRepo.findAllByOrderByNameAsc(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

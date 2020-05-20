@@ -31,7 +31,7 @@ public class GroupController {
 
     @GetMapping
     public ResponseEntity<Iterable<Group>> getGroups() {
-        return new ResponseEntity<>(groupRepo.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(groupRepo.findAllByOrderByNameAsc(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
