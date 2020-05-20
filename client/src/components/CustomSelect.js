@@ -14,7 +14,7 @@ class CustomSelect extends React.Component {
             position    : "relative",
             margin      : this.props.isGroupSelect || this.props.isMarkSelect || this.props.isSubjectSelect ? '2% 2% 2% 12%' : "0 auto",
             color       : "gray",
-            zIndex      : studentsModel.isModalWindowOpen || marksModel.isNewMarkModalOpen ? 0 : this.props.isSubjectSelect ? 120 : 100
+            zIndex      : studentsModel.isModalWindowOpen || marksModel.isNewMarkModalOpen ? this.props.isSubjectSelect ? 120 : 0 : this.props.isSubjectSelect ? 120 : 100
         }),
         placeholder: () => ({
             fontSize    : '18px',
