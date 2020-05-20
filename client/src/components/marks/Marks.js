@@ -6,6 +6,7 @@ import "../../css/marks.css";
 import MarksList from "./MarksList";
 import AddNewMark from "../students/AddNewMark";
 import Modal from "react-modal";
+import {userModel} from "../../model/UserModel";
 
 const customUserEditStyles = {
     content: {
@@ -22,6 +23,14 @@ const customUserEditStyles = {
 
 @observer
 class Marks extends Component {
+
+    constructor(props) {
+        super(props);
+        marksModel.currentPerson = JSON.parse(localStorage.getItem("currentPerson"));
+        if (marksModel.currentPerson === null) {
+            marksModel.currentPerson = userModel.person;
+        }
+    }
 
     closeNewMarkModal = () => {
         marksModel.isNewMarkModalOpen = false;

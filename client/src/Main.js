@@ -16,7 +16,6 @@ class Main extends Component {
         userModel.person = JSON.parse(localStorage.getItem("person"));
         menubarModel.selectedMenubarItem = JSON.parse(localStorage.getItem("selectedMenubarItem"));
         menubarModel.selectedPage = JSON.parse(localStorage.getItem("selectedPage"));
-        marksModel.currentPerson = userModel.person;
         if (menubarModel.selectedPage === null) {
             menubarModel.selectedMenubarItem = '1';
             menubarModel.selectedPage = 'subjects';

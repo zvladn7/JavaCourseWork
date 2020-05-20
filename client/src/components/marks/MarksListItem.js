@@ -36,16 +36,18 @@ class MarksListItem extends Component {
             </div>
             { userModel.person !== null
                 && userModel.person.type === 'T'
-                && userModel.person.id === this.props.mark.teacher.id
                 ? <div
                     className='marks-list-item__alter'
                 >
-                    <button
-                        className="marks-list-item__alter-button"
-                        onClick={this.openChangeMarkModalWindow}
-                    >
-                        Изменить
-                    </button>
+                    { userModel.person.id === this.props.mark.teacher.id
+                      ?  <button
+                            className="marks-list-item__alter-button"
+                            onClick={this.openChangeMarkModalWindow}
+                        >
+                            Изменить
+                        </button>
+                      : null
+                    }
                 </div>
                 : null
             }
