@@ -4,9 +4,31 @@ import {observer} from "mobx-react";
 import {marksModel} from "../../model/MarksModel";
 import "../../css/marks.css";
 import MarksList from "./MarksList";
+import AddNewMark from "../students/AddNewMark";
+import Modal from "react-modal";
+
+const customUserEditStyles = {
+    content: {
+        padding: '12%',
+        overflow: 'hidden',
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        margin: '0 auto',
+        width: '460px',
+        minWidth: '460px',
+        height: '560px',
+    }
+};
 
 @observer
 class Marks extends Component {
+
+    closeNewMarkModal = () => {
+        marksModel.isNewMarkModalOpen = false;
+        marksModel.isEditMark = false;
+        marksModel.selectedValue = null;
+        marksModel.selectedSubject = null;
+    }
 
     render() {
         if (menubarModel.isSelectedMenubarItemChanged) {
@@ -14,6 +36,13 @@ class Marks extends Component {
         }
 
         return <div className="marks-page">
+            <Modal
+                style={customUserEditStyles}
+                isOpen={marksModel.isNewMarkModalOpen}
+                onRequestClose={this.closeNewMarkModal}
+            >
+                <AddNewMark/>
+            </Modal>
             <h1 className="department__-list-component-header">
                 Оценки
             </h1>

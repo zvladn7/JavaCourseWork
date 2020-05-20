@@ -21,8 +21,8 @@
     flex-direction: row;
     position: relative;
     width: 80%;
-    max-width: 560px;
-    min-width: 480px;
+    max-width: 700px;
+    min-width: 560px;
     margin: 0 auto;
     border: 1px solid #E6E6E6;
     background-color: #FFF;
@@ -66,4 +66,15 @@
     padding-top: 5px;
     border: 1px solid #E6E6E6;
     background-color: #FFF;
+}
+
+.marks-list-item__alter {
+    width: 25%;
+    padding-top: 5px;
+    border: 1px solid #E6E6E6;
+    background-color: #FFF;
+}
+
+.marks-list-item__alter-button {
+    border-radius: 50px;
 }

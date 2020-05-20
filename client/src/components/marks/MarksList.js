@@ -4,6 +4,7 @@ import MarksListItem from "./MarksListItem";
 import distinctImage from "../../css/image/cup.svg"
 import {loadPersonMarks} from "../actions/marks/loadPersonMarks";
 import {observer} from "mobx-react";
+import {userModel} from "../../model/UserModel";
 
 @observer
 class MarksList extends Component {
@@ -42,6 +43,7 @@ class MarksList extends Component {
                     <img
                         className="marks-list-item__distinct-image"
                         src={distinctImage}
+                        alt={''}
                     />
                 </div>
                 <div
@@ -50,6 +52,16 @@ class MarksList extends Component {
                 >
                     Результат
                 </div>
+                { userModel.person !== null
+                && userModel.person.type === 'T'
+                    ? <div
+                        className='marks-list-item__alter'
+                        style={{backgroundColor: "#E6E6E6"}}
+                    >
+                        Изменить
+                    </div>
+                    : null
+                }
             </div>
             {
                 marksModel.marks.map(mark => {

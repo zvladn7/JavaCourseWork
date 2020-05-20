@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import distinctImage from "../../css/image/cup.svg"
+import {userModel} from "../../model/UserModel";
+import {marksModel} from "../../model/MarksModel";
 
 
 class MarksListItem extends Component {
+
+    openChangeMarkModalWindow = () => {
+        marksModel.selectedSubject = this.props.mark.subject;
+        marksModel.selectedValue = this.props.mark.value;
+        marksModel.isEditMark = true;
+        marksModel.isNewMarkModalOpen = true;
+        marksModel.studentToNewMark = this.props.mark.student;
+    }
 
     render() {
         return <div className="marks-list-item">
@@ -23,6 +33,21 @@ class MarksListItem extends Component {
             <div className="marks-list-item__value">
                 {this.props.mark.value}
             </div>
+            { userModel.person !== null
+                && userModel.person.type === 'T'
+                && userModel.person.id === this.props.mark.teacher.id
+                ? <div
+                    className='marks-list-item__alter'
+                >
+                    <button
+                        className="marks-list-item__alter-button"
+                        onClick={this.openChangeMarkModalWindow}
+                    >
+                        Изменить
+                    </button>
+                </div>
+                : null
+            }
         </div>
     }
 

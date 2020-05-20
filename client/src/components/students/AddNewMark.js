@@ -8,6 +8,7 @@ import {marksModel} from "../../model/MarksModel";
 import {createNewMark} from "../actions/marks/createNewMark";
 import {userModel} from "../../model/UserModel";
 import {toJS} from "mobx";
+import {studentsModel} from "../../model/StudentsModel";
 
 const marksOptions = [
     {value: 5, label: 'Отлично'},
@@ -25,8 +26,23 @@ class AddNewMark extends Component {
         loadSubject();
         subjectModel.selectedSubject = null;
 
-        this.state = {
-            options: []
+        if (marksModel.isEditMark) {
+            this.state = {
+                options: [],
+                subject: {
+                    value: marksModel.selectedSubject.name,
+                    label: marksModel.selectedSubject.name,
+                    id: marksModel.selectedSubject.id
+                },
+                value: {
+                    value: marksModel.selectedValue,
+                    label: marksModel.selectedValue,
+                }
+            }
+        } else {
+            this.state = {
+                options: []
+            }
         }
     }
 
@@ -55,7 +71,7 @@ class AddNewMark extends Component {
                 value: marksModel.selectedValue
             })
             marksModel.selectedValue = null;
-            marksModel.selectedValue = null;
+            marksModel.selectedSubject = null;
             marksModel.isNewMarkModalOpen = false;
         } else {
             document.getElementById("new-student-mark-page-warning").style.visibility = 'visible';
@@ -95,12 +111,16 @@ class AddNewMark extends Component {
                             isMulti={false}
                             placeholder={'Subject'}
                             isSubjectSelect={true}
+                            isMarkEdit={marksModel.isEditMark}
+                            selectedSubject={this.state.subject}
                         />
                         <CustomSelect
                             options={marksOptions}
                             isMulti={false}
                             placeholder={'Group'}
                             isMarkSelect={true}
+                            isMarkEdit={marksModel.isEditMark}
+                            selectedValue={this.state.value}
                         />
                         <input
                             className="createNewStudentMark"

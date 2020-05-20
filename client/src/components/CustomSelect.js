@@ -42,6 +42,8 @@ class CustomSelect extends React.Component {
 
         const defaultOptions = this.props.isGroupSelect
             ? this.props.selectedGroup === null ? null :  this.props.selectedGroup
+            : marksModel.isEditMark && this.props.isMarkSelect ? this.props.selectedValue
+            : marksModel.isEditMark && this.props.isSubjectSelect ? this.props.selectedSubject
             : []
 
         this.state = {

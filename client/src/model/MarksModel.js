@@ -26,6 +26,9 @@ export class MarksModel {
     @observable
     selectedValue = null;
 
+    @observable
+    isEditMark = false;
+
     @action
     dropSubjectLoadedFlag() {
         this.isSubjectLoaded = false;

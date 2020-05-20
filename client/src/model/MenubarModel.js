@@ -1,5 +1,4 @@
 import {action, observable} from 'mobx'
-import React from "react";
 import {marksModel} from "./MarksModel";
 import {userModel} from "./UserModel";
 
