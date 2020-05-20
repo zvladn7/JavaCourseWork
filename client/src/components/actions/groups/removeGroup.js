@@ -12,6 +12,9 @@ export async function removeGroup(groupId) {
         }
     });
 
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
+
+
     groupModel.isPresent = false;
 
 }

@@ -12,6 +12,7 @@ export async function editSubjectName(subject) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     subjectModel.isPresent = false;
 }

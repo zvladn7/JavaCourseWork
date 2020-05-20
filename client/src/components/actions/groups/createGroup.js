@@ -12,6 +12,7 @@ export async function createGroup(data) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     groupModel.isPresent = false;
 

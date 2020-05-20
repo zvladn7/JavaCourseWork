@@ -12,6 +12,7 @@ export async function createSubject(data) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     subjectModel.isPresent = false;
 

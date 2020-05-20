@@ -14,6 +14,7 @@ export async function loadStudents() {
     });
     studentsModel.students = await response.json();
     studentsModel.filterStudents();
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     console.log(toJS(studentsModel.students));
 

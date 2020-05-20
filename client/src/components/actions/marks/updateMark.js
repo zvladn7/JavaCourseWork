@@ -12,6 +12,7 @@ export async function updateMark(mark) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     marksModel.isPresent = false;
 }

@@ -12,6 +12,7 @@ export async function loadPersonMarks(personId) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     if (response.status === 404) {
         marksModel.marks = [];

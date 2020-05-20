@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {action, observable} from "mobx";
 
 export class UserModel {
 
@@ -16,6 +16,16 @@ export class UserModel {
 
     @observable
     isRedirect = false;
+
+    @action
+    dropOnTokenTimeoutIfExpired(status) {
+        if (status === 401) {
+            this.token = null;
+            this.person = null;
+            localStorage.setItem("token", JSON.stringify(null));
+            localStorage.setItem("person", JSON.stringify(null));
+        }
+    }
 }
 
 export const userModel = new UserModel();

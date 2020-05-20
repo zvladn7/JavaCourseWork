@@ -12,6 +12,7 @@ export async function addStudent(student) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     studentsModel.isPresent = false;
 

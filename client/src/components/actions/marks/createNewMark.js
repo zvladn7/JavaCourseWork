@@ -11,5 +11,6 @@ export async function createNewMark(mark) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
 }

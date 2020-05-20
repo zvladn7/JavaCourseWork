@@ -11,6 +11,7 @@ export async function removeSubject(subjectId) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     subjectModel.isPresent = false;
 

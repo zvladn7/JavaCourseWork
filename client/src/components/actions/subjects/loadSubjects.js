@@ -12,6 +12,8 @@ export async function loadSubject() {
             "Authorization": "Token " + userModel.token
         }
     });
+    console.log(response.status);
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     subjectModel.subjects = await response.json();
 

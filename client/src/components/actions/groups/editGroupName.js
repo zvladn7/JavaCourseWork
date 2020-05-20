@@ -12,6 +12,7 @@ export async function editGroupName(group) {
             "Authorization": "Token " + userModel.token
         }
     });
+    userModel.dropOnTokenTimeoutIfExpired(response.status);
 
     groupModel.isPresent = false;
 }
