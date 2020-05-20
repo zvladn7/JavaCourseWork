@@ -83,25 +83,33 @@ class AddStudent extends Component {
             && this.state.last_name !== null
             && this.state.father_name !== null
             && studentsModel.selectedGroups.length !== 0
+            && studentsModel.studentToEdit === null
         ) {
-            if (studentsModel.studentToEdit === null) {
-                addStudent({
-                    firstname: this.state.first_name,
-                    lastname: this.state.last_name,
-                    fathername: this.state.father_name,
-                    group: studentsModel.selectedGroups,
-                    type: 'S'
-                });
-            } else {
-                editStudent({
-                    id: studentsModel.studentToEdit.id,
-                    firstname: this.state.first_name,
-                    lastname: this.state.last_name,
-                    fathername: this.state.father_name,
-                    group: studentsModel.selectedGroups.length === 0 ? studentsModel.studentToEdit.group : studentsModel.selectedGroups,
-                    type: 'S'
-                });
-            }
+            addStudent({
+                firstname: this.state.first_name,
+                lastname: this.state.last_name,
+                fathername: this.state.father_name,
+                group: studentsModel.selectedGroups,
+                type: 'S'
+            });
+
+            studentsModel.selectedGroups = [];
+            studentsModel.isModalWindowOpen = false;
+            studentsModel.studentToEdit = null;
+            this.onRedirect();
+        } else if (this.state.first_name !== null
+            && this.state.last_name !== null
+            && this.state.father_name !== null
+            && studentsModel.studentToEdit !== null
+        ) {
+            editStudent({
+                id: studentsModel.studentToEdit.id,
+                firstname: this.state.first_name,
+                lastname: this.state.last_name,
+                fathername: this.state.father_name,
+                group: studentsModel.selectedGroups.length === 0 ? studentsModel.studentToEdit.group : studentsModel.selectedGroups,
+                type: 'S'
+            });
             studentsModel.selectedGroups = [];
             studentsModel.isModalWindowOpen = false;
             studentsModel.studentToEdit = null;
@@ -127,7 +135,7 @@ class AddStudent extends Component {
                 <div className="new-student-page-frame">
                     <div className="new-student-page__window-content">
                         <div className="new-student-page-header">
-                            Добавление
+                            {studentsModel.studentToEdit === null ? "Добавление" : "Изменение"}
                         </div>
                         <input
                             className="new-student-page-frame-cell"
@@ -166,7 +174,7 @@ class AddStudent extends Component {
                         <input
                             className="createStudent"
                             type="submit"
-                            value="Добавить"
+                            value={studentsModel.studentToEdit === null ? "Добавить" : "Изменить"}
                             name="add"
                             onClick={this.addStudent}
                         />

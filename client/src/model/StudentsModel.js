@@ -39,7 +39,9 @@ export class StudentsModel {
             this.filteredStudents = this.students.filter(student => {
                 let isFilteredStudent = false;
                 this.selectedGroups.forEach(group => {
-                    isFilteredStudent = (student.group.name === group) || isFilteredStudent;
+                    if (student.group !== null) {
+                        isFilteredStudent = (student.group.name === group) || isFilteredStudent;
+                    }
                 });
                 return isFilteredStudent;
             })
