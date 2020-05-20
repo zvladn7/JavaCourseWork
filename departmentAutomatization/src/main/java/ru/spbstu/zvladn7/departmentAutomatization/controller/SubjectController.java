@@ -4,17 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import ru.spbstu.zvladn7.departmentAutomatization.entity.Mark;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Subject;
 import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityByIdNotFoundException;
+import ru.spbstu.zvladn7.departmentAutomatization.repository.MarkRepository;
 import ru.spbstu.zvladn7.departmentAutomatization.repository.SubjectRepository;
 
 import javax.validation.Valid;
@@ -24,10 +18,15 @@ import javax.validation.Valid;
 public class SubjectController {
 
     private final SubjectRepository subjectRepo;
+    private final MarkRepository markRepo;
 
     @Autowired
-    public SubjectController(SubjectRepository subjectRepo) {
+    public SubjectController(
+            SubjectRepository subjectRepo,
+            MarkRepository markRepo
+    ) {
         this.subjectRepo = subjectRepo;
+        this.markRepo = markRepo;
     }
 
     @GetMapping
@@ -58,10 +57,15 @@ public class SubjectController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable long id) {
+    public ResponseEntity delete(@PathVariable long id) {
+        Subject subject = subjectRepo.findById(id).orElseThrow(() -> new EntityByIdNotFoundException(id));
+        Iterable<Mark> marks = markRepo.findBySubject(subject);
+        if (marks.iterator().hasNext()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         try {
             subjectRepo.deleteById(id);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (EmptyResultDataAccessException ignored) {
             throw new EntityByIdNotFoundException(id);
         }

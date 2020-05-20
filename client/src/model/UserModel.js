@@ -22,8 +22,7 @@ export class UserModel {
         if (status === 401) {
             this.token = null;
             this.person = null;
-            localStorage.setItem("token", JSON.stringify(null));
-            localStorage.setItem("person", JSON.stringify(null));
+            localStorage.clear();
         }
     }
 }

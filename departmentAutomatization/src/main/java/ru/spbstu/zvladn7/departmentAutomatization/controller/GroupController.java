@@ -4,18 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import ru.spbstu.zvladn7.departmentAutomatization.entity.Group;
+import ru.spbstu.zvladn7.departmentAutomatization.entity.Person;
 import ru.spbstu.zvladn7.departmentAutomatization.exception.EntityByIdNotFoundException;
 import ru.spbstu.zvladn7.departmentAutomatization.repository.GroupRepository;
+import ru.spbstu.zvladn7.departmentAutomatization.repository.PersonRepository;
 
 import javax.validation.Valid;
 
@@ -24,10 +18,15 @@ import javax.validation.Valid;
 public class GroupController {
 
     private final GroupRepository groupRepo;
+    private final PersonRepository personRepo;
 
     @Autowired
-    public GroupController(GroupRepository groupRepo) {
+    public GroupController(
+            GroupRepository groupRepo,
+            PersonRepository personRepo
+    ) {
         this.groupRepo = groupRepo;
+        this.personRepo = personRepo;
     }
 
     @GetMapping
@@ -59,9 +58,15 @@ public class GroupController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable long id) {
+    public ResponseEntity delete(@PathVariable long id) {
+        Group group = groupRepo.findById(id).orElseThrow(() -> new EntityByIdNotFoundException(id));
+        Iterable<Person> people = personRepo.findByGroup(group);
+        if (people.iterator().hasNext()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         try {
             groupRepo.deleteById(id);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (EmptyResultDataAccessException ignored) {
             throw new EntityByIdNotFoundException(id);
         }
