@@ -18,6 +18,12 @@ class ViewCrudPage extends Component {
             <h1 className="department__-list-component-header">
                 {this.props.header}
             </h1>
+            <p className="department__list-warning-header">
+                {userModel.isBadRequest ? "Невозможно удалить, так как " +
+                    (this.props.type === "groups" ? "в группе есть студенты!" : "по предмету стоят оценки!")
+                    : null
+                }
+            </p>
             <div className="department__list-component">
 
                 {userModel.person !== null && userModel.person.type === 'A'

@@ -14,6 +14,12 @@ export async function removeGroup(groupId) {
 
     userModel.dropOnTokenTimeoutIfExpired(response.status);
 
+    if (response.status === 400) {
+        userModel.isBadRequest = true;
+        setTimeout(() => {
+            userModel.isBadRequest = false;
+        }, 1500)
+    }
 
     groupModel.isPresent = false;
 

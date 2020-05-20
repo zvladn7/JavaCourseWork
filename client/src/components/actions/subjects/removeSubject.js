@@ -13,6 +13,13 @@ export async function removeSubject(subjectId) {
     });
     userModel.dropOnTokenTimeoutIfExpired(response.status);
 
+    if (response.status === 400) {
+        userModel.isBadRequest = true;
+        setTimeout(() => {
+            userModel.isBadRequest = false;
+        }, 1500)
+    }
+
     subjectModel.isPresent = false;
 
 }

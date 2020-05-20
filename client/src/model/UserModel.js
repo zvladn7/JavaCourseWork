@@ -17,6 +17,9 @@ export class UserModel {
     @observable
     isRedirect = false;
 
+    @observable
+    isBadRequest = false;
+
     @action
     dropOnTokenTimeoutIfExpired(status) {
         if (status === 401) {
