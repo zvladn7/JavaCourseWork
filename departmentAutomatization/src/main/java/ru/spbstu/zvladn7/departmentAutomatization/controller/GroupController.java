@@ -57,7 +57,6 @@ public class GroupController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity delete(@PathVariable long id) {
         Group group = groupRepo.findById(id).orElseThrow(() -> new EntityByIdNotFoundException(id));
         Iterable<Person> people = personRepo.findByGroup(group);
