@@ -72,7 +72,7 @@ public class AuthService {
                 authRequest.getLast_name(),
                 authRequest.getFather_name(),
                 authRequest.getGroup(),
-                'S'
+                authRequest.isStudent() ? 'S' : 'T'
         );
 
         person = personRepo.save(person);
