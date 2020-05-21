@@ -55,9 +55,12 @@ class Marks extends Component {
             <h1 className="department__-list-component-header">
                 Оценки
             </h1>
-            <h2 className="marks-page-person-name">
-                {marksModel.currentPerson.lastname + ' ' + marksModel.currentPerson.firstname + ' ' + marksModel.currentPerson.fathername}
-            </h2>
+            { marksModel.currentPerson !== null
+              ?  <h2 className="marks-page-person-name">
+                    {marksModel.currentPerson.lastname + ' ' + marksModel.currentPerson.firstname + ' ' + marksModel.currentPerson.fathername}
+                </h2>
+              : null
+            }
             <MarksList/>
         </div>
     }

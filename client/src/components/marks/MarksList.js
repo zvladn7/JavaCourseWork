@@ -18,7 +18,7 @@ class MarksList extends Component {
 
     render() {
 
-        if (!marksModel.isPresent) {
+        if (!marksModel.isPresent && marksModel.currentPerson !== null) {
             loadPersonMarks(marksModel.currentPerson.id);
         }
 
